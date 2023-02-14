@@ -9,24 +9,38 @@ public class CameraScript : MonoBehaviour
     public float Distance = 5.0f;
     public float ScrollSensibility = 10.0f;
     public float MoveSensibility = 0.5f;
-    public float CameraSpeed = 1.0f;
+    public float CameraSpeed = 1f;
+    private float initalSpeed = 0.0f;
     public float CameraTransitionTime = 0.5f;
     private Vector2 delta;
     private Vector2 lastPos;
 
-    bool mFirst = true;
+    PlanetData mSelected;
 
     // Start is called before the first frame update
     void Start()
     {
-        ScrollSensibility = 100f;
+        ScrollSensibility = 0.025f;
+        initalSpeed = CameraSpeed;
     }
 
     // Update is called once per frame
     void Update()
     {
+        UpdateCameraMovements();
+        if (mSelected)
+        {
+            if (Input.GetKey(KeyCode.Delete))
+            {
+                Destroy(mSelected.gameObject);
+            }
+        }
+    }
+
+    void UpdateCameraMovements()
+    {
         Distance -= Input.mouseScrollDelta.y * ScrollSensibility;
-        float min = 0.1f;
+        float min = GetMin();
         if (Distance < min) Distance = min;
         if (Input.GetKey(KeyCode.Mouse1))
         {
@@ -40,7 +54,14 @@ public class CameraScript : MonoBehaviour
         }
         transform.RotateAround(Center, transform.up, delta.x);
         transform.RotateAround(Center, transform.right, -delta.y);
-
+        if (Input.GetKey(KeyCode.LeftShift) && CameraSpeed == initalSpeed)
+        {
+            CameraSpeed *= 2;
+        }
+        else
+        {
+            CameraSpeed = initalSpeed;
+        }
         if (Input.GetKey(KeyCode.W))
         {
             Center += transform.forward * CameraSpeed;
@@ -70,14 +91,24 @@ public class CameraScript : MonoBehaviour
         transform.position = Center + cameraDir.normalized * Distance;
     }
 
+    float GetMin()
+    {
+        if (mSelected) return mSelected.transform.lossyScale.x * 2;
+        else return 0.1f;
+    }
+
     public void LerpCamera(GameObject planet)
     {
+        StopAllCoroutines();
+        mSelected = planet.GetComponent<PlanetData>();
+
         StartCoroutine(LerpCameraFromTo(Center, planet.transform.position, CameraTransitionTime));
         StartCoroutine(LerpDistanceFromTo(Distance, planet.transform.localScale.x * 3, CameraTransitionTime));
     }
 
     IEnumerator LerpDistanceFromTo(float initial, float goTo, float duration)
     {
+        var Selected = mSelected;
         for (float t = 0f; t < duration; t += Time.deltaTime)
         {
             Distance = Mathf.Lerp(initial, goTo, t / duration);
@@ -88,6 +119,7 @@ public class CameraScript : MonoBehaviour
 
     IEnumerator LerpCameraFromTo(Vector3 initial, Vector3 goTo, float duration)
     {
+        var Selected = mSelected;
         for (float t = 0f; t < duration; t += Time.deltaTime)
         {
             Center = Vector3.Lerp(initial, goTo, t / duration);

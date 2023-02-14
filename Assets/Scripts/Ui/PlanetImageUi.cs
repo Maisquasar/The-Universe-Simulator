@@ -6,7 +6,7 @@ using UnityEngine.EventSystems;
 public class PlanetImageUi : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
     public PlanetData PlanetRef;
-    public GameObject mDragedPlanet;
+    private GameObject mDragedPlanet;
 
     // Start is called before the first frame update
     void Start()
@@ -22,13 +22,15 @@ public class PlanetImageUi : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     public void OnPointerDown(PointerEventData eventData)
     {
         mDragedPlanet = Instantiate(PlanetRef, GameObject.Find("All Planets").transform).gameObject;
-        mDragedPlanet.transform.localScale = new Vector3(100f, 100f, 100f);
+        mDragedPlanet.transform.localScale = PlanetRef.transform.localScale;
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        mDragedPlanet.transform.position = ray.GetPoint(1000);
+        mDragedPlanet.transform.position = GetPoint(ray);
+        mDragedPlanet.layer = 2; //Ignore Raycasts.
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        mDragedPlanet.layer = 0;
         mDragedPlanet = null;
     }
 
@@ -37,6 +39,21 @@ public class PlanetImageUi : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         if (!mDragedPlanet)
             return;
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        mDragedPlanet.transform.position = ray.GetPoint(1000);
+        mDragedPlanet.transform.position = GetPoint(ray);
+    }
+
+    private Vector3 GetPoint(Ray ray)
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            var radius = mDragedPlanet.transform.localScale.x;
+            return hit.point + hit.normal * radius;
+        }
+        else
+        {
+            float dist = Vector3.Distance(Camera.main.GetComponent<CameraScript>().Center, Camera.main.transform.position);
+            return ray.GetPoint(dist);
+        }
     }
 }

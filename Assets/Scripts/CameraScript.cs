@@ -9,24 +9,38 @@ public class CameraScript : MonoBehaviour
     public float Distance = 5.0f;
     public float ScrollSensibility = 10.0f;
     public float MoveSensibility = 0.5f;
-    public float CameraSpeed = 1.0f;
+    public float CameraSpeed = 1f;
+    private float initalSpeed = 0.0f;
     public float CameraTransitionTime = 0.5f;
     private Vector2 delta;
     private Vector2 lastPos;
 
-    bool mFirst = true;
+    public PlanetData Selected;
 
     // Start is called before the first frame update
     void Start()
     {
-        ScrollSensibility = 100f;
+        ScrollSensibility = 0.025f;
+        initalSpeed = CameraSpeed;
     }
 
     // Update is called once per frame
     void Update()
     {
+        UpdateCameraMovements();
+        if (Selected)
+        {
+            if (Input.GetKey(KeyCode.Delete))
+            {
+                Destroy(Selected.gameObject);
+            }
+        }
+    }
+
+    void UpdateCameraMovements()
+    {
         Distance -= Input.mouseScrollDelta.y * ScrollSensibility;
-        float min = 0.1f;
+        float min = GetMin();
         if (Distance < min) Distance = min;
         if (Input.GetKey(KeyCode.Mouse1))
         {
@@ -40,7 +54,14 @@ public class CameraScript : MonoBehaviour
         }
         transform.RotateAround(Center, transform.up, delta.x);
         transform.RotateAround(Center, transform.right, -delta.y);
-
+        if (Input.GetKey(KeyCode.LeftShift) && CameraSpeed == initalSpeed)
+        {
+            CameraSpeed *= 2;
+        }
+        else
+        {
+            CameraSpeed = initalSpeed;
+        }
         if (Input.GetKey(KeyCode.W))
         {
             Center += transform.forward * CameraSpeed;
@@ -70,8 +91,17 @@ public class CameraScript : MonoBehaviour
         transform.position = Center + cameraDir.normalized * Distance;
     }
 
+    float GetMin()
+    {
+        if (Selected) return Selected.transform.lossyScale.x * 2;
+        else return 0.1f;
+    }
+
     public void LerpCamera(GameObject planet)
     {
+        StopAllCoroutines();
+        Selected = planet.GetComponent<PlanetData>();
+
         StartCoroutine(LerpCameraFromTo(Center, planet.transform.position, CameraTransitionTime));
         StartCoroutine(LerpDistanceFromTo(Distance, planet.transform.localScale.x * 3, CameraTransitionTime));
     }

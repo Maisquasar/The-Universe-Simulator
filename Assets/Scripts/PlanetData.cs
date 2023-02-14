@@ -10,22 +10,25 @@ public class PlanetData : MonoBehaviour
 
     [Tooltip("The Radius of the planet in Km")]
     public float Radius = 6371;
+
+    [Tooltip("The Radius of the planet in Km")]
+    public string PlanetName = "";
+
+    [Tooltip("The Radius of the planet in Km")]
     // Start is called before the first frame update
     void Start()
     {
-
     }
 
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
-    private void OnMouseDown()
+    public void OnMouseDown()
     {
         var camera = Camera.main.GetComponent<CameraScript>();
         camera.LerpCamera(gameObject);
     }
-
 }

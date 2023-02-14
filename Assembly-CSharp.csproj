@@ -82,6 +82,8 @@
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\AntiAliasing\IAntiAliasing.cs" />
     <Compile Include="Assets\Scripts\Ui\PlanetTab.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\Common\ImageEffectHelper.cs" />
+    <Compile Include="Assets\PlanetNameScript.cs" />
+    <Compile Include="Assets\Inspector.cs" />
     <Compile Include="Assets\Scripts\Ligma.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7902424347120231984}
   - component: {fileID: 7902424347119101168}
   - component: {fileID: 6459915427185550091}
+  - component: {fileID: 6338224573648486975}
   m_Layer: 0
   m_Name: Moon
   m_TagString: Untagged
@@ -98,3 +99,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Mass: 0.0123
   Radius: 6371
+--- !u!135 &6338224573648486975
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7902424347116845616}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.9997492
+  m_Center: {x: -0.00000023841855, y: 0.00000008940695, z: 0.00000008940695}

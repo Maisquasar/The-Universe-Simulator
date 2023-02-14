@@ -15,7 +15,7 @@ public class CameraScript : MonoBehaviour
     private Vector2 delta;
     private Vector2 lastPos;
 
-    PlanetData mSelected;
+    public PlanetData Selected;
 
     // Start is called before the first frame update
     void Start()
@@ -28,11 +28,11 @@ public class CameraScript : MonoBehaviour
     void Update()
     {
         UpdateCameraMovements();
-        if (mSelected)
+        if (Selected)
         {
             if (Input.GetKey(KeyCode.Delete))
             {
-                Destroy(mSelected.gameObject);
+                Destroy(Selected.gameObject);
             }
         }
     }
@@ -93,14 +93,14 @@ public class CameraScript : MonoBehaviour
 
     float GetMin()
     {
-        if (mSelected) return mSelected.transform.lossyScale.x * 2;
+        if (Selected) return Selected.transform.lossyScale.x * 2;
         else return 0.1f;
     }
 
     public void LerpCamera(GameObject planet)
     {
         StopAllCoroutines();
-        mSelected = planet.GetComponent<PlanetData>();
+        Selected = planet.GetComponent<PlanetData>();
 
         StartCoroutine(LerpCameraFromTo(Center, planet.transform.position, CameraTransitionTime));
         StartCoroutine(LerpDistanceFromTo(Distance, planet.transform.localScale.x * 3, CameraTransitionTime));
@@ -108,7 +108,6 @@ public class CameraScript : MonoBehaviour
 
     IEnumerator LerpDistanceFromTo(float initial, float goTo, float duration)
     {
-        var Selected = mSelected;
         for (float t = 0f; t < duration; t += Time.deltaTime)
         {
             Distance = Mathf.Lerp(initial, goTo, t / duration);
@@ -119,7 +118,6 @@ public class CameraScript : MonoBehaviour
 
     IEnumerator LerpCameraFromTo(Vector3 initial, Vector3 goTo, float duration)
     {
-        var Selected = mSelected;
         for (float t = 0f; t < duration; t += Time.deltaTime)
         {
             Center = Vector3.Lerp(initial, goTo, t / duration);

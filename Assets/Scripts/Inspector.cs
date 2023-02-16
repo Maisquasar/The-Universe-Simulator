@@ -14,7 +14,7 @@ public class Inspector : MonoBehaviour
     void Start()
     {
         HideButton = GameObject.Find("HideButton").GetComponent<Button>();
-        HideShow();
+        Hide();
         mCamera = Camera.main.GetComponent<CameraScript>();
     }
 
@@ -25,6 +25,23 @@ public class Inspector : MonoBehaviour
         {
             PlanetName.text = mCamera.Selected.PlanetName;
         }
+        
+    }
+
+    public void Hide()
+    {
+        if (hide)
+            return;
+        hide = true;
+        Background.SetActive(!hide);
+    }
+
+    public void Show()
+    {
+        if (!hide)
+            return;
+        hide = false;
+        Background.SetActive(!hide);
     }
 
     public void HideShow()

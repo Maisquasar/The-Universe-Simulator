@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlanetDataManager : MonoBehaviour
 {
-    [SerializeField] List<PlanetData> Planets;
+    [SerializeField] public List<PlanetData> Planets;
     // Start is called before the first frame update
     void Start()
     {

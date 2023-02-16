@@ -21,16 +21,6 @@ namespace UnityStandardAssets.CinematicEffects
                     return false;
                 }
 
-#if UNITY_5_5_OR_NEWER
-                if (!SystemInfo.supportsImageEffects)
-#else
-                if (!SystemInfo.supportsImageEffects || !SystemInfo.supportsRenderTextures)
-#endif
-                {
-                    Debug.LogWarningFormat("Image effects aren't supported on this device ({0})", effect);
-                    return false;
-                }
-
                 if (needDepth && !SystemInfo.SupportsRenderTextureFormat(RenderTextureFormat.Depth))
                 {
                     Debug.LogWarningFormat("Depth textures aren't supported on this device ({0})", effect);

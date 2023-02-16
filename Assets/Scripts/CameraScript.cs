@@ -16,6 +16,7 @@ public class CameraScript : MonoBehaviour
     private Vector2 lastPos;
 
     public PlanetData Selected;
+    public PlanetData Hovered;
 
     // Start is called before the first frame update
     void Start()
@@ -35,11 +36,14 @@ public class CameraScript : MonoBehaviour
                 Destroy(Selected.gameObject);
             }
         }
+        //print(Hovered);
     }
 
     void UpdateCameraMovements()
     {
+        print(Distance);
         Distance -= (Distance * 5) * Input.mouseScrollDelta.y * ScrollSensibility;
+        Distance = Mathf.Min(Distance, 500000);
         float min = GetMin();
         if (Distance < min) Distance = min;
         if (Input.GetKey(KeyCode.Mouse1))
@@ -93,8 +97,8 @@ public class CameraScript : MonoBehaviour
 
     float GetMin()
     {
-        if (Selected) return Selected.transform.lossyScale.x * 2;
-        else return 0.1f;
+        if (Selected) return Mathf.Max(Selected.transform.lossyScale.x * 2, 0.0f);
+        else return 0.0f;
     }
 
     public void LerpCamera(GameObject planet)

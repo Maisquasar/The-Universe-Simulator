@@ -208,9 +208,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f6b312d87689f894d8723968bb1456ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  PlanetName: Earth
   Mass: 1
   Radius: 6371
-  PlanetName: Earth
+  Density: 5.51
+  Speed: 30
+  Gravity: 30
+  ThetaScale: 0.001
+  CircleRadius: 0
 --- !u!135 &6974604603843102019
 SphereCollider:
   m_ObjectHideFlags: 0

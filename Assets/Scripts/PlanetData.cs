@@ -38,8 +38,7 @@ public class PlanetData : MonoBehaviour
     void CreateCircle()
     {
         float Distance = Vector3.Distance(Camera.main.transform.position, transform.position);
-        //float factor = 0.6f * (transform.lossyScale.x / 0.6f);
-        CircleRadius = Mathf.Max(Distance * 0.05f, transform.lossyScale.x + 0.002f);
+        CircleRadius = Mathf.Max(Distance * 0.05f, 0.02f);
         float width = Mathf.Max(0.004f * Distance, 0.004f);
         LineDrawer.startWidth = width;
         LineDrawer.endWidth = width;
@@ -55,7 +54,7 @@ public class PlanetData : MonoBehaviour
         }
     }
 
-    public float ThetaScale = 0.01f;
+    public float ThetaScale = 0.001f;
     private float Theta = 0f;
     public float CircleRadius;
 
@@ -78,10 +77,12 @@ public class PlanetData : MonoBehaviour
         bool inside = IsInside(screenPoint.x, screenPoint.y, screenPoint.z, CircleRadius, mouse.x, mouse.y, mouse.z);
         if (inside)
         {
-            if (!mCamera.Hovered || (mCamera.Hovered != this && Distance < Vector3.Distance(Camera.main.transform.position, mCamera.Hovered.transform.position)))
+            if (mCamera.Hovered == null || (mCamera.Hovered != this && Distance < Vector3.Distance(Camera.main.transform.position, mCamera.Hovered.transform.position)))
             {
+                //print($"Hovered null : { mCamera.Hovered == null } or {(mCamera.Hovered != this && Distance < Vector3.Distance(Camera.main.transform.position, mCamera.Hovered.transform.position))}");
                 mCamera.Hovered = this;
                 LineDrawer.gameObject.SetActive(true);
+                print($"Set {name}");
             }
             if (mCamera.Hovered == this)
             {
@@ -93,9 +94,10 @@ public class PlanetData : MonoBehaviour
             }
 
         }
-        if (!inside || (inside && mCamera.Hovered != this))
+        if (!inside && mCamera.Hovered == this || mCamera.Hovered != this && LineDrawer.gameObject.activeSelf)
         {
-            mCamera.Hovered = null;
+            if (mCamera.Hovered == this)
+                mCamera.Hovered = null;
             LineDrawer.gameObject.SetActive(false);
         }
     }

@@ -41,7 +41,6 @@ public class CameraScript : MonoBehaviour
 
     void UpdateCameraMovements()
     {
-        print(Distance);
         Distance -= (Distance * 5) * Input.mouseScrollDelta.y * ScrollSensibility;
         Distance = Mathf.Min(Distance, 500000);
         float min = GetMin();

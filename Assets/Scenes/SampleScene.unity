@@ -335,6 +335,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 116884353}
+  - component: {fileID: 116884354}
   m_Layer: 0
   m_Name: All Planets
   m_TagString: Untagged
@@ -359,6 +360,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &116884354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 116884352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d7579b24303e8414ba1c497a7a453710, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Planets: []
+  TimeScale: 0
+  TrajectoryUpdatePeriod: 20
 --- !u!1001 &171082604
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -370,13 +386,17 @@ PrefabInstance:
       propertyPath: LineMaterial
       value: 
       objectReference: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 2053399285435558994, guid: 3fc5e27511ed13f40bb4fe60d9bd1f12, type: 3}
+      propertyPath: trajectoryMat
+      value: 
+      objectReference: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 8832406666645964628, guid: 3fc5e27511ed13f40bb4fe60d9bd1f12, type: 3}
       propertyPath: m_Name
       value: Earth
       objectReference: {fileID: 0}
     - target: {fileID: 8832406666645964628, guid: 3fc5e27511ed13f40bb4fe60d9bd1f12, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8832406666646264692, guid: 3fc5e27511ed13f40bb4fe60d9bd1f12, type: 3}
       propertyPath: m_RootOrder
@@ -1077,6 +1097,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Planets: []
+  TimeScale: 1
+  TrajectoryUpdatePeriod: 10
 --- !u!1 &631886838
 GameObject:
   m_ObjectHideFlags: 0
@@ -3185,6 +3207,10 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 6459915427185550091, guid: ae0b9f4b7edf22640916818e0c510632, type: 3}
       propertyPath: LineMaterial
+      value: 
+      objectReference: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+    - target: {fileID: 6459915427185550091, guid: ae0b9f4b7edf22640916818e0c510632, type: 3}
+      propertyPath: trajectoryMat
       value: 
       objectReference: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 7902424347116807696, guid: ae0b9f4b7edf22640916818e0c510632, type: 3}

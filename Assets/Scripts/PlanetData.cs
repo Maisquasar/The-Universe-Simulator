@@ -24,6 +24,8 @@ public class PlanetData : MonoBehaviour
     [Tooltip("The planet Gravity in m/s^2")]
     public float Gravity = 9.81f;
 
+    public Material trajectoryMat;
+
     private LineRenderer LineDrawer;
 
     private LineRenderer TrajectoryDrawer;
@@ -55,8 +57,9 @@ public class PlanetData : MonoBehaviour
         TrajectoryDrawer = gameObject.AddComponent<LineRenderer>();
         TrajectoryDrawer.startWidth = 0.01f;
         TrajectoryDrawer.endWidth = 0.01f;
-        TrajectoryDrawer.material = new Material(Shader.Find("Standard"));
-        TrajectoryDrawer.material.color = Color.green;
+        TrajectoryDrawer.material = trajectoryMat;
+        TrajectoryDrawer.startColor = Color.green;
+        TrajectoryDrawer.endColor = Color.blue;
         TrajectoryDrawer.enabled = false;
         TrajectoryDrawer.positionCount = 0;
     }

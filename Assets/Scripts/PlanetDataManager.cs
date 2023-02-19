@@ -8,6 +8,8 @@ public class PlanetDataManager : MonoBehaviour
 
     [SerializeField] private List<PlanetData> Planets;
     [SerializeField] private float TimeScale = 1.0f;
+    [SerializeField] private int TrajectoryUpdatePeriod = 10;
+    private int currentFrame = 0;
     private float timeSinceLastFixedUpdate;
     private PlanetData focusedPlanet;
     private CameraScript mainCam;
@@ -21,12 +23,19 @@ public class PlanetDataManager : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        currentFrame++;
+        bool updateTrajectory = false;
+        if (currentFrame >= TrajectoryUpdatePeriod)
+        {
+            currentFrame -= TrajectoryUpdatePeriod;
+            updateTrajectory = true;
+        }
         timeSinceLastFixedUpdate = Time.realtimeSinceStartup;
         foreach (var planet in Planets)
         {
             planet.IPosition += planet.Velocity * Time.fixedDeltaTime * TimeScale;
             planet.Velocity += GetAccelAtPoint(planet.transform.position, planet) * Time.fixedDeltaTime * TimeScale;
-            planet.PuchPositionToTrajectory();
+            if (updateTrajectory) planet.PuchPositionToTrajectory();
         }
         if (focusedPlanet)
         {

@@ -15,6 +15,7 @@ public class CameraScript : MonoBehaviour
     private Vector2 delta;
     private Vector2 lastPos;
     private Inspector mInspector;
+    private bool hasFinishedLerp = false;
 
     [System.NonSerialized] public PlanetData Selected;
     [System.NonSerialized] public PlanetData Hovered;
@@ -42,6 +43,10 @@ public class CameraScript : MonoBehaviour
 
     void UpdateCameraMovements()
     {
+        if (hasFinishedLerp && Selected)
+        {
+            Center = Selected.transform.position;
+        }
         // Return if inside an Ui Component
         if (mInspector.InputFileSelected) return;
         else
@@ -138,11 +143,13 @@ public class CameraScript : MonoBehaviour
 
     IEnumerator LerpCameraFromTo(Vector3 initial, Vector3 goTo, float duration)
     {
+        hasFinishedLerp = false;
         for (float t = 0f; t < duration; t += Time.deltaTime)
         {
-            Center = Vector3.Lerp(initial, goTo, t / duration);
+            Center = Vector3.Lerp(initial, Selected.transform.position, t / duration);
             yield return 0;
         }
-        Center = goTo;
+        Center = Selected.transform.position;
+        hasFinishedLerp = true;
     }
 }

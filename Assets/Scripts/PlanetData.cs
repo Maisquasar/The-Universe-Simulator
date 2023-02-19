@@ -26,7 +26,17 @@ public class PlanetData : MonoBehaviour
 
     private LineRenderer LineDrawer;
 
+    private LineRenderer TrajectoryDrawer;
+
     private CameraScript mCamera;
+
+    public Vector3 Velocity = Vector3.zero;
+    public Vector3 IPosition = Vector3.zero;
+
+    private Vector3[] path = new Vector3[256];
+    private int pathSize = 0;
+
+    private PlanetDataManager manager;
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +49,33 @@ public class PlanetData : MonoBehaviour
         LineDrawer.material = new Material(Shader.Find("Standard"));
         CreateCircle();
         mCamera = Camera.main.GetComponent<CameraScript>();
+        manager = gameObject.GetComponentsInParent<PlanetDataManager>()[0];
+        manager.ReceivePlanet(this);
+        IPosition = transform.position;
+        TrajectoryDrawer = gameObject.AddComponent<LineRenderer>();
+        TrajectoryDrawer.startWidth = 0.01f;
+        TrajectoryDrawer.endWidth = 0.01f;
+        TrajectoryDrawer.material = new Material(Shader.Find("Standard"));
+        TrajectoryDrawer.material.color = Color.green;
+        TrajectoryDrawer.enabled = false;
+        TrajectoryDrawer.positionCount = 0;
+    }
+
+    public void DrawTrajectory()
+    {
+        TrajectoryDrawer.positionCount = Mathf.Min(pathSize, path.Length);
+        int index = 0;
+        for (int i = Mathf.Max(pathSize-path.Length, 0); i < pathSize; i++)
+        {
+            TrajectoryDrawer.SetPosition(index, path[i % path.Length]);
+            index++;
+        }
+    }
+
+    public void PuchPositionToTrajectory()
+    {
+        path[pathSize % path.Length] = IPosition;
+        pathSize++;
     }
 
     public void SetPlanetName(string value)
@@ -122,7 +159,12 @@ public class PlanetData : MonoBehaviour
 
     public void OnMouseDown()
     {
-        var camera = Camera.main.GetComponent<CameraScript>();
-        camera.LerpCamera(gameObject);
+        TrajectoryDrawer.enabled = true;
+        manager.SetFocusedPlanet(this);
+    }
+
+    public void HideTrajectory()
+    {
+        TrajectoryDrawer.enabled = false;
     }
 }

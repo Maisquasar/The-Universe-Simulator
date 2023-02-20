@@ -31,6 +31,14 @@ public class Inspector : MonoBehaviour
 
     public void NewSelected(PlanetData selected)
     {
+        if (selected == null)
+        {
+            IPlanetName.text = null;
+            PlanetName.text = null;
+            IPlanetRadius.text = null;
+            IPlanetMass.text = null;
+            return;
+        }
         IPlanetName.text = selected.PlanetName;
         PlanetName.text = IPlanetName.text;
         IPlanetRadius.text = selected.Radius.ToString();

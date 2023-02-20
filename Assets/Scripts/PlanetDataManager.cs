@@ -33,6 +33,7 @@ public class PlanetDataManager : MonoBehaviour
         timeSinceLastFixedUpdate = Time.realtimeSinceStartup;
         foreach (var planet in Planets)
         {
+            if (!planet.Placed) continue;
             planet.IPosition += planet.Velocity * Time.fixedDeltaTime * TimeScale;
             planet.Velocity += GetAccelAtPoint(planet.transform.position, planet) * Time.fixedDeltaTime * TimeScale;
             if (updateTrajectory) planet.PuchPositionToTrajectory();
@@ -48,6 +49,7 @@ public class PlanetDataManager : MonoBehaviour
         float delta = (Time.realtimeSinceStartup - timeSinceLastFixedUpdate) * TimeScale;
         foreach (var planet in Planets)
         {
+            if (!planet.Placed) continue;
             planet.transform.position = planet.IPosition + planet.Velocity * delta;
         }
     }
@@ -55,6 +57,11 @@ public class PlanetDataManager : MonoBehaviour
     public void ReceivePlanet(PlanetData planet)
     {
         Planets.Add(planet);
+    }
+
+    public void DeletePlanet(PlanetData planet)
+    {
+        Planets.Remove(planet);
     }
 
     public void SetFocusedPlanet(PlanetData planet)

@@ -5,6 +5,13 @@ using UnityEngine.EventSystems;
 
 public class CameraScript : MonoBehaviour
 {
+    public enum Tool
+    {
+        SELECTION,
+        TRANSFORM,
+        DELETE,
+    };
+
     public Vector3 Center;
     public float Distance = 5.0f;
     public float ScrollSensibility = 10.0f;
@@ -16,8 +23,11 @@ public class CameraScript : MonoBehaviour
     private Vector2 lastPos;
     private Inspector mInspector;
     private bool hasFinishedLerp = false;
+    private PlanetDataManager mPlanetDataManager;
+    [System.NonSerialized] public Tool CurrentTool = Tool.SELECTION;
 
     [System.NonSerialized] public PlanetData Selected;
+    [System.NonSerialized] public PlanetData Focused;
     [System.NonSerialized] public PlanetData Hovered;
 
     // Start is called before the first frame update
@@ -26,26 +36,20 @@ public class CameraScript : MonoBehaviour
         ScrollSensibility = 0.025f;
         initalSpeed = CameraSpeed;
         mInspector = FindObjectOfType<Inspector>();
+        mPlanetDataManager = FindObjectOfType<PlanetDataManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
         UpdateCameraMovements();
-        if (Selected)
-        {
-            if (Input.GetKey(KeyCode.Delete))
-            {
-                Destroy(Selected.gameObject);
-            }
-        }
     }
 
     void UpdateCameraMovements()
     {
-        if (hasFinishedLerp && Selected)
+        if (hasFinishedLerp && Focused)
         {
-            Center = Selected.transform.position;
+            Center = Focused.transform.position;
         }
         // Return if inside an Ui Component
         if (mInspector.InputFileSelected) return;
@@ -88,31 +92,59 @@ public class CameraScript : MonoBehaviour
         }
         if (Input.GetKey(KeyCode.W))
         {
+            if (Focused)
+                DisableFocus();
             Center += transform.forward * CameraSpeed;
         }
         if (Input.GetKey(KeyCode.S))
         {
+            if (Focused)
+                DisableFocus();
             Center -= transform.forward * CameraSpeed;
         }
         if (Input.GetKey(KeyCode.D))
         {
+            if (Focused)
+                DisableFocus();
             Center += transform.right * CameraSpeed;
         }
         if (Input.GetKey(KeyCode.A))
         {
+            if (Focused)
+                DisableFocus();
             Center -= transform.right * CameraSpeed;
         }
         if (Input.GetKey(KeyCode.E))
         {
+            if (Focused)
+                DisableFocus();
             Center += transform.up * CameraSpeed;
         }
         if (Input.GetKey(KeyCode.Q))
         {
+            if (Focused)
+                DisableFocus();
             Center -= transform.up * CameraSpeed;
+        }
+
+        if (Input.GetMouseButtonDown(0) && Physics.RaycastAll(Camera.main.ScreenPointToRay(Input.mousePosition)).Length == 0)
+        {
+            if (Selected)
+                Deselect();
         }
         delta = new Vector2();
         Vector3 cameraDir = -transform.forward;
         transform.position = Center + cameraDir.normalized * Distance;
+    }
+
+    public void DisableFocus()
+    {
+        Focused = null;
+    }
+
+    public void Deselect()
+    {
+        SelectPlanet(null);
     }
 
     float GetMin()
@@ -121,12 +153,44 @@ public class CameraScript : MonoBehaviour
         else return 0.0f;
     }
 
+    public void SelectPlanet(PlanetData planet)
+    {
+        switch (CurrentTool)
+        {
+            case Tool.SELECTION:
+                {
+                    if (planet)
+                    {
+                        Selected = planet.GetComponent<PlanetData>();
+                    }
+                    else
+                    {
+                        Selected = null;
+                        StopAllCoroutines();
+                    }
+                    Focused = Selected;
+                    mInspector.NewSelected(Selected);
+                    mPlanetDataManager.SetFocusedPlanet(Focused);
+                    break;
+                }
+            case Tool.TRANSFORM:
+                {
+                    break;
+                }
+            case Tool.DELETE:
+                {
+                    if (!planet) return;
+                    Destroy(planet.gameObject);
+                    break;
+                }
+        }
+
+    }
+
+
     public void LerpCamera(GameObject planet)
     {
         StopAllCoroutines();
-        Selected = planet.GetComponent<PlanetData>();
-        mInspector.NewSelected(Selected);
-
         StartCoroutine(LerpCameraFromTo(Center, planet.transform.position, CameraTransitionTime));
         StartCoroutine(LerpDistanceFromTo(Distance, planet.transform.localScale.x * 3, CameraTransitionTime));
     }

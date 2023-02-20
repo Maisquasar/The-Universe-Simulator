@@ -35,6 +35,9 @@ public class PlanetData : MonoBehaviour
     public Vector3 Velocity = Vector3.zero;
     public Vector3 IPosition = Vector3.zero;
 
+    public bool IsData = false;
+    public bool Placed = false;
+
     private Vector3[] path = new Vector3[256];
     private int pathSize = 0;
 
@@ -51,17 +54,21 @@ public class PlanetData : MonoBehaviour
         LineDrawer.material = new Material(Shader.Find("Standard"));
         CreateCircle();
         mCamera = Camera.main.GetComponent<CameraScript>();
-        manager = gameObject.GetComponentsInParent<PlanetDataManager>()[0];
-        manager.ReceivePlanet(this);
-        IPosition = transform.position;
-        TrajectoryDrawer = gameObject.AddComponent<LineRenderer>();
-        TrajectoryDrawer.startWidth = 0.01f;
-        TrajectoryDrawer.endWidth = 0.01f;
-        TrajectoryDrawer.material = trajectoryMat;
-        TrajectoryDrawer.startColor = Color.green;
-        TrajectoryDrawer.endColor = Color.blue;
-        TrajectoryDrawer.enabled = false;
-        TrajectoryDrawer.positionCount = 0;
+
+        manager = FindObjectOfType<PlanetDataManager>();
+        if (!IsData)
+        {
+            manager.ReceivePlanet(this);
+            IPosition = transform.position;
+            TrajectoryDrawer = gameObject.AddComponent<LineRenderer>();
+            TrajectoryDrawer.startWidth = 0.01f;
+            TrajectoryDrawer.endWidth = 0.01f;
+            TrajectoryDrawer.material = trajectoryMat;
+            TrajectoryDrawer.startColor = Color.green;
+            TrajectoryDrawer.endColor = Color.blue;
+            TrajectoryDrawer.enabled = false;
+            TrajectoryDrawer.positionCount = 0;
+        }
     }
 
     public void DrawTrajectory()
@@ -89,6 +96,7 @@ public class PlanetData : MonoBehaviour
 
     private void OnDestroy()
     {
+        manager.DeletePlanet(this);
     }
 
     void CreateCircle()
@@ -163,7 +171,7 @@ public class PlanetData : MonoBehaviour
     public void OnMouseDown()
     {
         TrajectoryDrawer.enabled = true;
-        manager.SetFocusedPlanet(this);
+        mCamera.SelectPlanet(this);
     }
 
     public void HideTrajectory()

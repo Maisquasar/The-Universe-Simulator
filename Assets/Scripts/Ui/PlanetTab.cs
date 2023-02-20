@@ -14,7 +14,7 @@ public class PlanetTab : MonoBehaviour
     }
 
     HorizontalLayoutGroup mLayout;
-    [SerializeField] PlanetDataManager PlanetManager;
+    [SerializeField] PlanetUiManager PlanetManager;
     List<ImageTextGroup> PlanetsImageTextGroup = new List<ImageTextGroup>();
     // Start is called before the first frame update
     void Start()
@@ -22,6 +22,7 @@ public class PlanetTab : MonoBehaviour
         mLayout = gameObject.GetComponentInChildren<HorizontalLayoutGroup>();
         foreach (var i in PlanetManager.transform.GetComponentsInChildren<PlanetData>())
         {
+            i.gameObject.SetActive(false);
             var path = AssetDatabase.LoadAssetAtPath<Texture>("Assets/Textures/PlanetsTexture/" + i.name + ".png");
             //var icon = AssetDatabase.GetCachedIcon(path);
             Transform vertical = Instantiate(mLayout.transform.GetChild(0), mLayout.transform);

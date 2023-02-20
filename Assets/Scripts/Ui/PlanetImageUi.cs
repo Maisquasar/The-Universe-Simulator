@@ -1,3 +1,4 @@
+using Assets.Scripts;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -35,7 +36,7 @@ public class PlanetImageUi : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     {
         mDragedPlanet.layer = 0;
         mDragedPlanet.GetComponent<PlanetData>().Placed = true;
-        mDragedPlanet.GetComponent<PlanetData>().IPosition = mDragedPlanet.transform.position;
+        mDragedPlanet.GetComponent<PlanetData>().LerpedPosition = new DVec3(mDragedPlanet.transform.position);
         mDragedPlanet = null;
     }
 

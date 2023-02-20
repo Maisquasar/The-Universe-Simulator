@@ -375,6 +375,12 @@ MonoBehaviour:
   Planets: []
   TimeScale: 0
   TrajectoryUpdatePeriod: 20
+  CameraLerpTime: 1
+  lerpTime: 0
+  lastLerpedPos:
+    x: 0
+    y: 0
+    z: 0
 --- !u!1001 &171082604
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -382,6 +388,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 116884353}
     m_Modifications:
+    - target: {fileID: 2053399285435558994, guid: 3fc5e27511ed13f40bb4fe60d9bd1f12, type: 3}
+      propertyPath: Placed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2053399285435558994, guid: 3fc5e27511ed13f40bb4fe60d9bd1f12, type: 3}
       propertyPath: LineMaterial
       value: 
@@ -3861,6 +3871,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 116884353}
     m_Modifications:
+    - target: {fileID: 6459915427185550091, guid: ae0b9f4b7edf22640916818e0c510632, type: 3}
+      propertyPath: Placed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6459915427185550091, guid: ae0b9f4b7edf22640916818e0c510632, type: 3}
       propertyPath: LineMaterial
       value: 

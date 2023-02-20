@@ -1,3 +1,4 @@
+using Assets.Scripts;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,13 +33,14 @@ public class PlanetData : MonoBehaviour
 
     private CameraScript mCamera;
 
-    public Vector3 Velocity = Vector3.zero;
-    public Vector3 IPosition = Vector3.zero;
+    public DVec3 Velocity = new DVec3();
+    public DVec3 PhysicPosition = new DVec3();
+    public DVec3 LerpedPosition = new DVec3();
 
     public bool IsData = false;
     public bool Placed = false;
 
-    private Vector3[] path = new Vector3[256];
+    private DVec3[] path = new DVec3[256];
     private int pathSize = 0;
 
     private PlanetDataManager manager;
@@ -59,7 +61,8 @@ public class PlanetData : MonoBehaviour
         if (!IsData)
         {
             manager.ReceivePlanet(this);
-            IPosition = transform.position;
+            PhysicPosition = new DVec3(transform.position);
+            LerpedPosition = new DVec3(transform.position);
             TrajectoryDrawer = gameObject.AddComponent<LineRenderer>();
             TrajectoryDrawer.startWidth = 0.01f;
             TrajectoryDrawer.endWidth = 0.01f;
@@ -77,14 +80,14 @@ public class PlanetData : MonoBehaviour
         int index = 0;
         for (int i = Mathf.Max(pathSize-path.Length, 0); i < pathSize; i++)
         {
-            TrajectoryDrawer.SetPosition(index, path[i % path.Length]);
+            TrajectoryDrawer.SetPosition(index, path[i % path.Length].AsVector());
             index++;
         }
     }
 
     public void PuchPositionToTrajectory()
     {
-        path[pathSize % path.Length] = IPosition;
+        path[pathSize % path.Length] = PhysicPosition;
         pathSize++;
     }
 

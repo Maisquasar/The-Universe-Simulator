@@ -49,7 +49,7 @@ public class CameraScript : MonoBehaviour
     {
         if (hasFinishedLerp && Focused)
         {
-            Center = Focused.transform.position;
+            //Center = Focused.LerpedPosition.AsVector();
         }
         // Return if inside an Ui Component
         if (mInspector.InputFileSelected) return;
@@ -144,7 +144,7 @@ public class CameraScript : MonoBehaviour
 
     public void Deselect()
     {
-        SelectPlanet(null);
+        //SelectPlanet(null);
     }
 
     float GetMin()
@@ -171,6 +171,7 @@ public class CameraScript : MonoBehaviour
                     Focused = Selected;
                     mInspector.NewSelected(Selected);
                     mPlanetDataManager.SetFocusedPlanet(Focused);
+                    print(Focused);
                     break;
                 }
             case Tool.TRANSFORM:

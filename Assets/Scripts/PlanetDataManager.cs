@@ -1,3 +1,4 @@
+using Assets.Scripts;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,12 +8,15 @@ public class PlanetDataManager : MonoBehaviour
     const double GC = 6.67430e-11;
 
     [SerializeField] private List<PlanetData> Planets;
-    [SerializeField] private float TimeScale = 1.0f;
+    [SerializeField] private double TimeScale = 1.0f;
     [SerializeField] private int TrajectoryUpdatePeriod = 10;
+    [SerializeField] private float CameraLerpTime = 1.0f;
     private int currentFrame = 0;
     private float timeSinceLastFixedUpdate;
     private PlanetData focusedPlanet;
     private CameraScript mainCam;
+    [SerializeField] private float lerpTime = 0.0f;
+    [SerializeField] private DVec3 lastLerpedPos = new DVec3();
     // Start is called before the first frame update
     void Start()
     {
@@ -34,8 +38,8 @@ public class PlanetDataManager : MonoBehaviour
         foreach (var planet in Planets)
         {
             if (!planet.Placed) continue;
-            planet.IPosition += planet.Velocity * Time.fixedDeltaTime * TimeScale;
-            planet.Velocity += GetAccelAtPoint(planet.transform.position, planet) * Time.fixedDeltaTime * TimeScale;
+            planet.PhysicPosition += planet.Velocity * (Time.fixedDeltaTime * TimeScale);
+            planet.Velocity += GetAccelAtPoint(planet.PhysicPosition, planet) * Time.fixedDeltaTime * TimeScale;
             if (updateTrajectory) planet.PuchPositionToTrajectory();
         }
         if (focusedPlanet)
@@ -46,11 +50,13 @@ public class PlanetDataManager : MonoBehaviour
 
     private void Update()
     {
-        float delta = (Time.realtimeSinceStartup - timeSinceLastFixedUpdate) * TimeScale;
+        if (lerpTime > 0) lerpTime -= Time.deltaTime;
+        double delta = (Time.realtimeSinceStartup - timeSinceLastFixedUpdate) * TimeScale;
         foreach (var planet in Planets)
         {
             if (!planet.Placed) continue;
-            planet.transform.position = planet.IPosition + planet.Velocity * delta;
+            planet.LerpedPosition = planet.PhysicPosition + planet.Velocity * delta;
+            planet.transform.position = (planet.LerpedPosition - GetFocusLerped()).AsVector();
         }
     }
 
@@ -70,23 +76,42 @@ public class PlanetDataManager : MonoBehaviour
         if (focusedPlanet)
         {
             focusedPlanet.HideTrajectory();
+            lastLerpedPos = focusedPlanet.LerpedPosition;
         }
+        else
+        {
+            lastLerpedPos = new DVec3();
+        }
+        lerpTime = CameraLerpTime;
         focusedPlanet = planet;
         if (focusedPlanet)
         {
-            mainCam.LerpCamera(focusedPlanet.gameObject);
+            //mainCam.LerpCamera(focusedPlanet.gameObject);
         }
     }
 
-    private Vector3 GetAccelAtPoint(Vector3 point, PlanetData self = null)
+    public DVec3 GetFocus()
     {
-        Vector3 result = Vector3.zero;
+        if (focusedPlanet) return focusedPlanet.LerpedPosition;
+        else return new DVec3();
+    }
+
+    public DVec3 GetFocusLerped()
+    {
+        if (lerpTime > 0.0f) return lastLerpedPos + (GetFocus() - lastLerpedPos) * ((CameraLerpTime - lerpTime) / CameraLerpTime);
+        else return GetFocus();
+    }
+
+    private DVec3 GetAccelAtPoint(DVec3 point, PlanetData self = null)
+    {
+        DVec3 result = new DVec3();
         foreach (var planet in Planets)
         {
-            if (planet == self) continue; // no need to apply +inf acceleration to ourself, we are not BLJing
-            Vector3 direction = planet.transform.position - point;
-            float dist = direction.sqrMagnitude;
-            result += direction.normalized * (float)(GC/dist);
+            if (planet == self) continue; // no need to apply +inf acceleration to ourself
+            DVec3 direction = planet.PhysicPosition - point;
+            double dist = direction.LengthSquared();
+            if (dist < 0.000001) continue; // also no need to apply +inf acceleration at all
+            result += direction.Normalized() * (GC/dist);
         }
         return result;
     }

@@ -396,10 +396,6 @@ PrefabInstance:
       propertyPath: LineMaterial
       value: 
       objectReference: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
-    - target: {fileID: 2053399285435558994, guid: 3fc5e27511ed13f40bb4fe60d9bd1f12, type: 3}
-      propertyPath: trajectoryMat
-      value: 
-      objectReference: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 8832406666645964628, guid: 3fc5e27511ed13f40bb4fe60d9bd1f12, type: 3}
       propertyPath: m_Name
       value: Earth
@@ -2599,6 +2595,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlanetRef: {fileID: 0}
+  mDragedPlanetData: {fileID: 0}
 --- !u!1 &1103030400
 GameObject:
   m_ObjectHideFlags: 0
@@ -3877,10 +3874,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6459915427185550091, guid: ae0b9f4b7edf22640916818e0c510632, type: 3}
       propertyPath: LineMaterial
-      value: 
-      objectReference: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
-    - target: {fileID: 6459915427185550091, guid: ae0b9f4b7edf22640916818e0c510632, type: 3}
-      propertyPath: trajectoryMat
       value: 
       objectReference: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
     - target: {fileID: 7902424347116807696, guid: ae0b9f4b7edf22640916818e0c510632, type: 3}

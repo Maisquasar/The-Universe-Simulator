@@ -214,6 +214,21 @@ MonoBehaviour:
   Density: 5.51
   Speed: 30
   Gravity: 30
+  trajectoryMat: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  Velocity:
+    x: 0
+    y: 0
+    z: 0
+  PhysicPosition:
+    x: 0
+    y: 0
+    z: 0
+  LerpedPosition:
+    x: 0
+    y: 0
+    z: 0
+  IsData: 0
+  Placed: 0
   ThetaScale: 0.001
   CircleRadius: 0
 --- !u!135 &6974604603843102019

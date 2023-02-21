@@ -42,10 +42,6 @@ public class PlanetDataManager : MonoBehaviour
             planet.Velocity += GetAccelAtPoint(planet.PhysicPosition, planet) * Time.fixedDeltaTime * TimeScale;
             if (updateTrajectory) planet.PuchPositionToTrajectory();
         }
-        if (focusedPlanet)
-        {
-            focusedPlanet.DrawTrajectory();
-        }
     }
 
     private void Update()
@@ -57,6 +53,10 @@ public class PlanetDataManager : MonoBehaviour
             if (!planet.Placed) continue;
             planet.LerpedPosition = planet.PhysicPosition + planet.Velocity * delta;
             planet.transform.position = (planet.LerpedPosition - GetFocusLerped()).AsVector();
+        }
+        if (focusedPlanet)
+        {
+            focusedPlanet.DrawTrajectory();
         }
     }
 
@@ -111,7 +111,7 @@ public class PlanetDataManager : MonoBehaviour
             DVec3 direction = planet.PhysicPosition - point;
             double dist = direction.LengthSquared();
             if (dist < 0.000001) continue; // also no need to apply +inf acceleration at all
-            result += direction.Normalized() * (GC/dist);
+            result += direction.Normalized() * (GC*planet.Mass/dist);
         }
         return result;
     }

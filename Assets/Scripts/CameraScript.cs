@@ -171,7 +171,6 @@ public class CameraScript : MonoBehaviour
                     Focused = Selected;
                     mInspector.NewSelected(Selected);
                     mPlanetDataManager.SetFocusedPlanet(Focused);
-                    print(Focused);
                     break;
                 }
             case Tool.TRANSFORM:

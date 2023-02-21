@@ -74,20 +74,28 @@ public class PlanetData : MonoBehaviour
         }
     }
 
+    public void PlaceInSpace()
+    {
+        PhysicPosition = new DVec3(transform.position) + manager.GetFocusLerped();
+        LerpedPosition = new DVec3(transform.position) + manager.GetFocusLerped();
+        Placed = true;
+        manager.ReceivePlanet(this);
+    }
+
     public void DrawTrajectory()
     {
         TrajectoryDrawer.positionCount = Mathf.Min(pathSize, path.Length);
         int index = 0;
         for (int i = Mathf.Max(pathSize-path.Length, 0); i < pathSize; i++)
         {
-            TrajectoryDrawer.SetPosition(index, path[i % path.Length].AsVector());
+            TrajectoryDrawer.SetPosition(index, (path[i % path.Length] - manager.GetFocusLerped()).AsVector());
             index++;
         }
     }
 
     public void PuchPositionToTrajectory()
     {
-        path[pathSize % path.Length] = PhysicPosition;
+        path[pathSize % path.Length] = LerpedPosition;
         pathSize++;
     }
 

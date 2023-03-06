@@ -54,7 +54,7 @@ public class PlanetData : MonoBehaviour
         LineDrawer = objToSpawn.AddComponent<LineRenderer>();
         LineDrawer.startWidth = 0.01f;
         LineDrawer.endWidth = 0.01f;
-        LineDrawer.material = new Material(Shader.Find("Standard"));
+        LineDrawer.material = new Material(Shader.Find("Unlit/Texture"));
         CreateCircle();
         mCamera = Camera.main.GetComponent<CameraScript>();
 

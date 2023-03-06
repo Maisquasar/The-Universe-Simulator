@@ -61,9 +61,14 @@ public class PlanetDataManager : MonoBehaviour
             lerpTime -= Time.deltaTime;
         }
         double delta = (Time.realtimeSinceStartup - timeSinceLastFixedUpdate) * TimeScale;
+        if (focusedPlanet && focusedPlanet.Placed)
+        {
+            focusedPlanet.LerpedPosition = focusedPlanet.PhysicPosition + focusedPlanet.Velocity * delta;
+            focusedPlanet.transform.position = (focusedPlanet.LerpedPosition - GetFocusLerped()).AsVector();
+        }
         foreach (var planet in Planets)
         {
-            if (!planet.Placed) continue;
+            if (!planet.Placed || planet == focusedPlanet) continue;
             planet.LerpedPosition = planet.PhysicPosition + planet.Velocity * delta;
             planet.transform.position = (planet.LerpedPosition - GetFocusLerped()).AsVector();
         }

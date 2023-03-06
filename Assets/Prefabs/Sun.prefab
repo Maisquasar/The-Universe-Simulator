@@ -220,6 +220,10 @@ MonoBehaviour:
     x: 0
     y: 0
     z: 0
+  Acceleration:
+    x: 0
+    y: 0
+    z: 0
   PhysicPosition:
     x: 0
     y: 0
@@ -229,7 +233,7 @@ MonoBehaviour:
     y: 0
     z: 0
   IsData: 0
-  Placed: 1
+  Placed: 0
   ThetaScale: 0.001
   CircleRadius: 0
 --- !u!135 &6030459109870418161

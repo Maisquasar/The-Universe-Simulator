@@ -100,7 +100,7 @@ public class Inspector : MonoBehaviour
         if (!mCamera.Selected) return;
 
         float result;
-        if (float.TryParse(IPlanetRadius.text, out result))
+        if (float.TryParse(IPlanetMass.text, out result))
         {
             mCamera.Selected.Mass = result;
         }

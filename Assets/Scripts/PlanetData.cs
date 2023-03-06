@@ -54,7 +54,7 @@ public class PlanetData : MonoBehaviour
         LineDrawer = objToSpawn.AddComponent<LineRenderer>();
         LineDrawer.startWidth = 0.01f;
         LineDrawer.endWidth = 0.01f;
-        LineDrawer.material = new Material(Shader.Find("Standard"));
+        LineDrawer.material = new Material(Shader.Find("Unlit/Texture"));
         CreateCircle();
         mCamera = Camera.main.GetComponent<CameraScript>();
 
@@ -73,6 +73,19 @@ public class PlanetData : MonoBehaviour
             TrajectoryDrawer.enabled = false;
             TrajectoryDrawer.positionCount = 0;
         }
+    }
+
+    public void BeginDrag()
+    {
+        gameObject.layer = 2; //Ignore Raycasts.
+        IsData = false;
+        Placed = false;
+    }
+
+    public void EndDrag()
+    {
+        gameObject.layer = 0;
+        PlaceInSpace();
     }
 
     public void PlaceInSpace()
@@ -144,11 +157,6 @@ public class PlanetData : MonoBehaviour
             return true;
         else
             return false;
-    }
-
-    private void OnDrawGizmos()
-    {
-        //Gizmos.DrawSphere(transform.position, CircleRadius);
     }
 
     void Update()

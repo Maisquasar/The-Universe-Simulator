@@ -27,11 +27,16 @@ public class PlanetImageUi : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
         mDragedPlanetData = mDragedPlanet.GetComponent<PlanetData>();
         mDragedPlanet.SetActive(true);
         mDragedPlanet.transform.localScale = PlanetRef.transform.localScale;
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        mDragedPlanet.transform.position = GetPoint(ray);
+        UpdateDraggedPlanet(mDragedPlanet);
         mDragedPlanet.layer = 2; //Ignore Raycasts.
         mDragedPlanetData.IsData = false;
         mDragedPlanetData.Placed = false;
+    }
+
+    static public void UpdateDraggedPlanet(GameObject planet)
+    {
+        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        planet.transform.position = GetPoint(ray, planet);
     }
 
     public void OnPointerUp(PointerEventData eventData)
@@ -44,18 +49,16 @@ public class PlanetImageUi : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
     public void OnDrag(PointerEventData eventData)
     {
         if (!mDragedPlanet)
-            return;
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        mDragedPlanet.transform.position = GetPoint(ray);
-
+            return; 
+        UpdateDraggedPlanet(mDragedPlanet);
     }
 
-    private Vector3 GetPoint(Ray ray)
+    static private Vector3 GetPoint(Ray ray, GameObject planet)
     {
         RaycastHit hit;
         if (Physics.Raycast(ray, out hit))
         {
-            var radius = mDragedPlanet.transform.localScale.x;
+            var radius = planet.transform.localScale.x;
             return hit.point + hit.normal * radius;
         }
         else

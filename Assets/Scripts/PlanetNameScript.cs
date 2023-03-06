@@ -15,7 +15,7 @@ public class PlanetNameScript : MonoBehaviour, IPointerDownHandler
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         float dist = Vector3.Distance(Planet3DText.transform.position, Camera.main.transform.position) * 0.005f;
 

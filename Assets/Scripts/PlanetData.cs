@@ -34,6 +34,7 @@ public class PlanetData : MonoBehaviour
     private CameraScript mCamera;
 
     public DVec3 Velocity = new DVec3();
+    public DVec3 Acceleration = new DVec3();
     public DVec3 PhysicPosition = new DVec3();
     public DVec3 LerpedPosition = new DVec3();
 
@@ -68,7 +69,7 @@ public class PlanetData : MonoBehaviour
             TrajectoryDrawer.endWidth = 0.01f;
             TrajectoryDrawer.material = trajectoryMat;
             TrajectoryDrawer.startColor = Color.green;
-            TrajectoryDrawer.endColor = Color.blue;
+            TrajectoryDrawer.endColor = Color.green;
             TrajectoryDrawer.enabled = false;
             TrajectoryDrawer.positionCount = 0;
         }
@@ -84,13 +85,16 @@ public class PlanetData : MonoBehaviour
 
     public void DrawTrajectory()
     {
-        TrajectoryDrawer.positionCount = Mathf.Min(pathSize, path.Length);
+        TrajectoryDrawer.positionCount = Mathf.Min(pathSize, path.Length)+1;
         int index = 0;
         for (int i = Mathf.Max(pathSize-path.Length, 0); i < pathSize; i++)
         {
             TrajectoryDrawer.SetPosition(index, (path[i % path.Length] - manager.GetFocusLerped()).AsVector());
             index++;
         }
+        TrajectoryDrawer.SetPosition(index, (LerpedPosition - manager.GetFocusLerped()).AsVector());
+        TrajectoryDrawer.startWidth = Vector3.Distance(transform.position, Camera.main.transform.position) * 0.005f;
+        TrajectoryDrawer.endWidth = TrajectoryDrawer.startWidth;
     }
 
     public void PuchPositionToTrajectory()

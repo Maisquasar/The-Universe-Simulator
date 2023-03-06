@@ -35,11 +35,16 @@ public class PlanetDataManager : MonoBehaviour
             updateTrajectory = true;
         }
         timeSinceLastFixedUpdate = Time.realtimeSinceStartup;
+        double dt = (Time.fixedDeltaTime * TimeScale);
         foreach (var planet in Planets)
         {
             if (!planet.Placed) continue;
-            planet.PhysicPosition += planet.Velocity * (Time.fixedDeltaTime * TimeScale);
-            planet.Velocity += GetAccelAtPoint(planet.PhysicPosition, planet) * Time.fixedDeltaTime * TimeScale;
+            DVec3 newPos = planet.PhysicPosition + planet.Velocity * dt + planet.Acceleration * (dt * dt * 0.5);
+            DVec3 newAcc = GetAccelAtPoint(planet.PhysicPosition, planet);
+            DVec3 newVel = planet.Velocity + (planet.Acceleration + newAcc)*(dt*0.5);
+            planet.PhysicPosition = newPos;
+            planet.Velocity = newVel;
+            planet.Acceleration = newAcc;
             if (updateTrajectory) planet.PuchPositionToTrajectory();
         }
     }
@@ -109,10 +114,10 @@ public class PlanetDataManager : MonoBehaviour
         {
             if (planet == self) continue; // no need to apply +inf acceleration to ourself
             DVec3 direction = planet.PhysicPosition - point;
-            double dist = direction.LengthSquared();
+            double dist = direction.Length() * 1e7; // one unit is 10 000 Km, so we need to multiply by 1e7 to go in meters
             if (dist < 0.000001) continue; // also no need to apply +inf acceleration at all
-            result += direction.Normalized() * (GC*planet.Mass/dist);
+            result += direction.Normalized() * (GC*planet.Mass*5.97e24/(dist*dist));
         }
-        return result;
+        return result / 1e7; // dont forget to rescale up to our unit system
     }
 }

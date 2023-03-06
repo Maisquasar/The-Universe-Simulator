@@ -161,6 +161,18 @@ public class CameraScript : MonoBehaviour
 
     public void SelectPlanet(PlanetData planet)
     {
+        if (mInspector.InputFileSelected) return;
+        else
+        {
+            var pointerEventData = new PointerEventData(EventSystem.current);
+            pointerEventData.position = Input.mousePosition;
+            var raycastResults = new List<RaycastResult>();
+            EventSystem.current.RaycastAll(pointerEventData, raycastResults);
+            if (raycastResults.Count > 0)
+            {
+                return;
+            }
+        }
         switch (CurrentTool)
         {
             case Tool.SELECTION:

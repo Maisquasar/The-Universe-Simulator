@@ -13,15 +13,18 @@ public class PlanetDataManager : MonoBehaviour
     [SerializeField] private float CameraLerpTime = 1.0f;
     private int currentFrame = 0;
     private float timeSinceLastFixedUpdate;
-    private PlanetData focusedPlanet;
     private CameraScript mainCam;
     [SerializeField] private float lerpTime = 0.0f;
     [SerializeField] private DVec3 lastLerpedPos = new DVec3();
+
+    public List<PlanetData> GetAllPlanets() { return Planets; }
+
     // Start is called before the first frame update
     void Start()
     {
         timeSinceLastFixedUpdate = Time.realtimeSinceStartup;
         mainCam = Camera.main.GetComponent<CameraScript>();
+        CameraLerpTime = mainCam.CameraLerpTime;
     }
 
     // Update is called once per frame
@@ -46,7 +49,10 @@ public class PlanetDataManager : MonoBehaviour
 
     private void Update()
     {
-        if (lerpTime > 0) lerpTime -= Time.deltaTime;
+        if (lerpTime > 0)
+        {
+            lerpTime -= Time.deltaTime;
+        }
         double delta = (Time.realtimeSinceStartup - timeSinceLastFixedUpdate) * TimeScale;
         foreach (var planet in Planets)
         {
@@ -54,9 +60,9 @@ public class PlanetDataManager : MonoBehaviour
             planet.LerpedPosition = planet.PhysicPosition + planet.Velocity * delta;
             planet.transform.position = (planet.LerpedPosition - GetFocusLerped()).AsVector();
         }
-        if (focusedPlanet)
+        if (mainCam.Focused)
         {
-            focusedPlanet.DrawTrajectory();
+            mainCam.Focused.DrawTrajectory();
         }
     }
 
@@ -73,27 +79,21 @@ public class PlanetDataManager : MonoBehaviour
 
     public void SetFocusedPlanet(PlanetData planet)
     {
-        if (planet == focusedPlanet) return;
-        if (focusedPlanet)
+        if (mainCam.Focused)
         {
-            focusedPlanet.HideTrajectory();
-            lastLerpedPos = focusedPlanet.LerpedPosition;
+            mainCam.Focused.HideTrajectory();
+            lastLerpedPos = mainCam.Focused.LerpedPosition;
         }
         else
         {
             lastLerpedPos = new DVec3();
         }
         lerpTime = CameraLerpTime;
-        focusedPlanet = planet;
-        if (focusedPlanet)
-        {
-            //mainCam.LerpCamera(focusedPlanet.gameObject);
-        }
     }
 
     public DVec3 GetFocus()
     {
-        if (focusedPlanet) return focusedPlanet.LerpedPosition;
+        if (mainCam.Focused) return mainCam.Focused.LerpedPosition;
         else return new DVec3();
     }
 

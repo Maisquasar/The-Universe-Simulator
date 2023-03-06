@@ -18,7 +18,7 @@ public class CameraScript : MonoBehaviour
     public float MoveSensibility = 0.5f;
     public float CameraSpeed = 1f;
     private float initalSpeed = 0.0f;
-    public float CameraTransitionTime = 0.5f;
+    public float CameraLerpTime = 1.0f;
     private Vector2 delta;
     private Vector2 lastPos;
     private Inspector mInspector;
@@ -29,6 +29,7 @@ public class CameraScript : MonoBehaviour
     [System.NonSerialized] public PlanetData Selected;
     [System.NonSerialized] public PlanetData Focused;
     [System.NonSerialized] public PlanetData Hovered;
+    [System.NonSerialized] public PlanetData Dragged;
 
     // Start is called before the first frame update
     void Start()
@@ -43,19 +44,19 @@ public class CameraScript : MonoBehaviour
     void Update()
     {
         UpdateCameraMovements();
-        if (Selected)
+        if (Input.GetMouseButton(0) && Dragged)
         {
-            if (!Selected.Placed)
-                PlanetImageUi.UpdateDraggedPlanet(Selected.gameObject);
+            PlanetImageUi.UpdateDraggedPlanet(Dragged.gameObject);
+        }
+        else if (Dragged && Input.GetMouseButtonUp(0))
+        {
+            Dragged.EndDrag();
+            Dragged = null;
         }
     }
 
     void UpdateCameraMovements()
     {
-        if (hasFinishedLerp && Focused)
-        {
-            //Center = Focused.LerpedPosition.AsVector();
-        }
         // Return if inside an Ui Component
         if (mInspector.InputFileSelected) return;
         else
@@ -164,6 +165,8 @@ public class CameraScript : MonoBehaviour
         {
             case Tool.SELECTION:
                 {
+                    if (planet == Focused)
+                        return;
                     if (planet)
                     {
                         Selected = planet.GetComponent<PlanetData>();
@@ -173,15 +176,18 @@ public class CameraScript : MonoBehaviour
                         Selected = null;
                         StopAllCoroutines();
                     }
+                    mPlanetDataManager.SetFocusedPlanet(Focused);
                     Focused = Selected;
                     mInspector.NewSelected(Selected);
-                    mPlanetDataManager.SetFocusedPlanet(Focused);
+                    LerpCamera(planet.gameObject, CameraLerpTime);
                     break;
                 }
             case Tool.TRANSFORM:
                 {
+                    Focused = null;
+                    Selected = null;
+                    Dragged = planet;
                     planet.BeginDrag();
-                    planet.Dragged = true;
                     break;
                 }
             case Tool.DELETE:
@@ -195,11 +201,10 @@ public class CameraScript : MonoBehaviour
     }
 
 
-    public void LerpCamera(GameObject planet)
+    public void LerpCamera(GameObject planet, float lerpTime)
     {
-        StopAllCoroutines();
-        StartCoroutine(LerpCameraFromTo(Center, planet.transform.position, CameraTransitionTime));
-        StartCoroutine(LerpDistanceFromTo(Distance, planet.transform.localScale.x * 3, CameraTransitionTime));
+        StartCoroutine(LerpCameraFromTo(Center, Vector3.zero, lerpTime));
+        StartCoroutine(LerpDistanceFromTo(Distance, planet.transform.localScale.x * 3, lerpTime));
     }
 
     IEnumerator LerpDistanceFromTo(float initial, float goTo, float duration)

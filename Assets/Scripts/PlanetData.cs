@@ -39,7 +39,6 @@ public class PlanetData : MonoBehaviour
 
     public bool IsData = false;
     public bool Placed = false;
-    public bool Dragged = false;
 
     private DVec3[] path = new DVec3[256];
     private int pathSize = 0;
@@ -77,7 +76,7 @@ public class PlanetData : MonoBehaviour
 
     public void BeginDrag()
     {
-        this.gameObject.layer = 2; //Ignore Raycasts.
+        gameObject.layer = 2; //Ignore Raycasts.
         IsData = false;
         Placed = false;
     }
@@ -156,11 +155,6 @@ public class PlanetData : MonoBehaviour
             return false;
     }
 
-    private void OnDrawGizmos()
-    {
-        //Gizmos.DrawSphere(transform.position, CircleRadius);
-    }
-
     void Update()
     {
         var screenPoint = transform.position;
@@ -190,16 +184,6 @@ public class PlanetData : MonoBehaviour
             if (mCamera.Hovered == this)
                 mCamera.Hovered = null;
             LineDrawer.gameObject.SetActive(false);
-        }
-
-        if (Input.GetMouseButton(0) && Dragged)
-        {
-            PlanetImageUi.UpdateDraggedPlanet(gameObject);
-        }
-        else if (Dragged && Input.GetMouseButtonUp(0))
-        {
-            Dragged = false;
-            EndDrag();
         }
     }
 

@@ -26,10 +26,10 @@ public class CameraScript : MonoBehaviour
     private PlanetDataManager mPlanetDataManager;
     [System.NonSerialized] public Tool CurrentTool = Tool.SELECTION;
 
-    [System.NonSerialized] public PlanetData Selected;
-    [System.NonSerialized] public PlanetData Focused;
-    [System.NonSerialized] public PlanetData Hovered;
-    [System.NonSerialized] public PlanetData Dragged;
+    public PlanetData Selected;
+    public PlanetData Focused;
+    public PlanetData Hovered;
+    public PlanetData Dragged;
 
     // Start is called before the first frame update
     void Start()
@@ -165,8 +165,6 @@ public class CameraScript : MonoBehaviour
         {
             case Tool.SELECTION:
                 {
-                    if (planet == Focused)
-                        return;
                     if (planet)
                     {
                         Selected = planet.GetComponent<PlanetData>();
@@ -176,8 +174,8 @@ public class CameraScript : MonoBehaviour
                         Selected = null;
                         StopAllCoroutines();
                     }
-                    mPlanetDataManager.SetFocusedPlanet(Focused);
-                    Focused = Selected;
+                    mPlanetDataManager.SetFocusedPlanet(planet);
+                    Focused = planet;
                     mInspector.NewSelected(Selected);
                     LerpCamera(planet.gameObject, CameraLerpTime);
                     break;

@@ -13,6 +13,8 @@ public class PlanetDataManager : MonoBehaviour
     [SerializeField] private float CameraLerpTime = 1.0f;
     private int currentFrame = 0;
     private float timeSinceLastFixedUpdate;
+
+    private PlanetData focusedPlanet;
     private CameraScript mainCam;
     [SerializeField] private float lerpTime = 0.0f;
     [SerializeField] private DVec3 lastLerpedPos = new DVec3();
@@ -60,9 +62,9 @@ public class PlanetDataManager : MonoBehaviour
             planet.LerpedPosition = planet.PhysicPosition + planet.Velocity * delta;
             planet.transform.position = (planet.LerpedPosition - GetFocusLerped()).AsVector();
         }
-        if (mainCam.Focused)
+        if (focusedPlanet)
         {
-            mainCam.Focused.DrawTrajectory();
+            focusedPlanet.DrawTrajectory();
         }
     }
 
@@ -79,21 +81,22 @@ public class PlanetDataManager : MonoBehaviour
 
     public void SetFocusedPlanet(PlanetData planet)
     {
-        if (mainCam.Focused)
+        if (focusedPlanet)
         {
-            mainCam.Focused.HideTrajectory();
-            lastLerpedPos = mainCam.Focused.LerpedPosition;
+            focusedPlanet.HideTrajectory();
+            lastLerpedPos = focusedPlanet.LerpedPosition;
         }
         else
         {
             lastLerpedPos = new DVec3();
         }
         lerpTime = CameraLerpTime;
+        focusedPlanet = planet;
     }
 
     public DVec3 GetFocus()
     {
-        if (mainCam.Focused) return mainCam.Focused.LerpedPosition;
+        if (focusedPlanet) return focusedPlanet.LerpedPosition;
         else return new DVec3();
     }
 

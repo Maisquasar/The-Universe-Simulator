@@ -43,6 +43,11 @@ public class CameraScript : MonoBehaviour
     void Update()
     {
         UpdateCameraMovements();
+        if (Selected)
+        {
+            if (!Selected.Placed)
+                PlanetImageUi.UpdateDraggedPlanet(Selected.gameObject);
+        }
     }
 
     void UpdateCameraMovements()
@@ -175,6 +180,8 @@ public class CameraScript : MonoBehaviour
                 }
             case Tool.TRANSFORM:
                 {
+                    planet.BeginDrag();
+                    planet.Dragged = true;
                     break;
                 }
             case Tool.DELETE:

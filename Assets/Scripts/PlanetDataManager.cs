@@ -62,7 +62,8 @@ public class PlanetDataManager : MonoBehaviour
 
     public void ReceivePlanet(PlanetData planet)
     {
-        Planets.Add(planet);
+        if (!Planets.Contains(planet))
+            Planets.Add(planet);
     }
 
     public void DeletePlanet(PlanetData planet)

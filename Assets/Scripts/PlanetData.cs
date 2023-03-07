@@ -124,7 +124,8 @@ public class PlanetData : MonoBehaviour
 
     private void OnDestroy()
     {
-        manager.DeletePlanet(this);
+        if (manager)
+            manager.DeletePlanet(this);
     }
 
     void CreateCircle()

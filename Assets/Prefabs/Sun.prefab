@@ -234,6 +234,7 @@ MonoBehaviour:
     z: 0
   IsData: 0
   Placed: 0
+  IsStar: 1
   ThetaScale: 0.001
   CircleRadius: 0
 --- !u!135 &6030459109870418161

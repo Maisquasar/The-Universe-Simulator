@@ -17,7 +17,7 @@ public class PlanetTab : MonoBehaviour
     [SerializeField] PlanetUiManager PlanetManager;
     List<ImageTextGroup> PlanetsImageTextGroup = new List<ImageTextGroup>();
     // Start is called before the first frame update
-    void Start()
+    public void Start()
     {
         mLayout = gameObject.GetComponentInChildren<HorizontalLayoutGroup>();
         foreach (var i in PlanetManager.transform.GetComponentsInChildren<PlanetData>())

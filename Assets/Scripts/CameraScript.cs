@@ -31,6 +31,8 @@ public class CameraScript : MonoBehaviour
     public PlanetData Hovered;
     public PlanetData Dragged;
 
+    private Camera mCamera;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -38,6 +40,7 @@ public class CameraScript : MonoBehaviour
         initalSpeed = CameraSpeed;
         mInspector = FindObjectOfType<Inspector>();
         mPlanetDataManager = FindObjectOfType<PlanetDataManager>();
+        mCamera = GetComponent<Camera>();
     }
 
     // Update is called once per frame
@@ -70,6 +73,7 @@ public class CameraScript : MonoBehaviour
                 return;
             }
         }
+        mCamera.nearClipPlane = Mathf.Max(Distance * 0.000001f, 0.01f);
         Distance -= (Distance * 5) * Input.mouseScrollDelta.y * ScrollSensibility;
         Distance = Mathf.Min(Distance, 500000);
         float min = GetMin();

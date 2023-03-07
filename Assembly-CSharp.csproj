@@ -90,12 +90,14 @@
     <Compile Include="Assets\Scripts\Ui\PlanetTab.cs" />
     <Compile Include="Assets\Scripts\Ui\PlanetUiManager.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\Common\ImageEffectHelper.cs" />
+    <Compile Include="Assets\Scripts\GravityFieldRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\MultiPassHollywoodFlares.shader" />
+    <None Include="Assets\Materials\Testogus.shader" />
     <None Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\Blend.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
     <None Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Shaders\SunShaftsComposite.shader" />

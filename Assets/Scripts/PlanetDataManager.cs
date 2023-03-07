@@ -116,7 +116,7 @@ public class PlanetDataManager : MonoBehaviour
         else return GetFocus();
     }
 
-    private DVec3 GetAccelAtPoint(DVec3 point, PlanetData self = null)
+    public DVec3 GetAccelAtPoint(DVec3 point, PlanetData self = null)
     {
         DVec3 result = new DVec3();
         foreach (var planet in Planets)
@@ -126,6 +126,20 @@ public class PlanetDataManager : MonoBehaviour
             double dist = direction.Length() * 1e7; // one unit is 10 000 Km, so we need to multiply by 1e7 to go in meters
             if (dist < 0.000001) continue; // also no need to apply +inf acceleration at all
             result += direction.Normalized() * (GC*planet.Mass*5.97e24/(dist*dist));
+        }
+        return result / 1e7; // dont forget to rescale up to our unit system
+    }
+
+    public double GetAccelForceAtPoint(DVec3 point, PlanetData self = null)
+    {
+        double result = 0.0;
+        foreach (var planet in Planets)
+        {
+            if (planet == self) continue; // no need to apply +inf acceleration to ourself
+            DVec3 direction = planet.LerpedPosition - point;
+            double dist = direction.Length() * 1e7; // one unit is 10 000 Km, so we need to multiply by 1e7 to go in meters
+            if (dist < 0.000001) continue; // also no need to apply +inf acceleration at all
+            result += GC * planet.Mass * 5.97e24 / (dist * dist);
         }
         return result / 1e7; // dont forget to rescale up to our unit system
     }

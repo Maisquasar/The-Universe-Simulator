@@ -91,6 +91,7 @@ public class PlanetDataManager : MonoBehaviour
 
     public void SetFocusedPlanet(PlanetData planet)
     {
+        if (focusedPlanet == planet) return;
         if (focusedPlanet)
         {
             focusedPlanet.HideTrajectory();

@@ -81,7 +81,11 @@ public class Inspector : MonoBehaviour
     {
         float result;
         if (mCamera.Selected && float.TryParse(IPlanetRadius.text, out result))
+        {
             mCamera.Selected.Radius = result;
+            var scale = result / 10000f;
+            mCamera.Selected.transform.localScale = new Vector3(scale, scale, scale);
+        }
         else if (mCamera.Selected)
             IPlanetRadius.text = mCamera.Selected.Radius.ToString();
     }

@@ -9,13 +9,16 @@ public class UiScript : MonoBehaviour
     {
         NONE,
         PLANETS,
-        STARS
+        STARS,
+        OTHERS
     }
 
     [SerializeField] Button mPlanetsButton;
     [SerializeField] Button mStarsButton;
+
     [SerializeField] PlanetTab mPlanetTab;
     [SerializeField] StarTab mStarTab;
+    [SerializeField] OtherTab mOtherTab;
 
     Tab mCurrentTab = Tab.NONE;
 
@@ -36,6 +39,7 @@ public class UiScript : MonoBehaviour
         if (mCurrentTab == Tab.PLANETS)
             return;
         mStarTab.gameObject.SetActive(false);
+        mOtherTab.gameObject.SetActive(false);
         mCurrentTab = Tab.PLANETS;
         mPlanetTab.gameObject.SetActive(true);
     }
@@ -44,8 +48,19 @@ public class UiScript : MonoBehaviour
     {
         if (mCurrentTab == Tab.STARS)
             return;
-        mStarTab.gameObject.SetActive(true);
-        mCurrentTab = Tab.STARS;
+        mOtherTab.gameObject.SetActive(false);
         mPlanetTab.gameObject.SetActive(false);
+        mCurrentTab = Tab.STARS;
+        mStarTab.gameObject.SetActive(true);
+    }
+
+    public void ShowOthersSelection()
+    {
+        if (mCurrentTab == Tab.OTHERS)
+            return;
+        mPlanetTab.gameObject.SetActive(false);
+        mStarTab.gameObject.SetActive(false);
+        mCurrentTab = Tab.OTHERS;
+        mOtherTab.gameObject.SetActive(true);
     }
 }

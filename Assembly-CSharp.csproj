@@ -67,7 +67,10 @@
     <Compile Include="Assets\Scripts\Ui\ToolUi.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Scripts\ScreenOverlay.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Scripts\BloomOptimized.cs" />
+    <Compile Include="Assets\BlackHole\Scripts\AutoBehaviour.cs" />
+    <Compile Include="Assets\BlackHole\Scripts\AsteroidRotation.cs" />
     <Compile Include="Assets\Scripts\DVec3.cs" />
+    <Compile Include="Assets\BlackHole\Scripts\BlackHoleCamera.cs" />
     <Compile Include="Assets\Scripts\PlanetData.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Scripts\Quads.cs" />
     <Compile Include="Assets\Scripts\GravityFieldRenderer.cs" />
@@ -75,8 +78,11 @@
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Scripts\Triangles.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Utility\FPSCounter.cs" />
     <Compile Include="Assets\Scripts\PlanetNameScript.cs" />
+    <Compile Include="Assets\BlackHole\Scripts\BlackHoleSphere.cs" />
+    <Compile Include="Assets\BlackHole\Scripts\BlackHoleRenderer.cs" />
     <Compile Include="Assets\OtherTab.cs" />
     <Compile Include="Assets\Scripts\Ui\StarUiManager.cs" />
+    <Compile Include="Assets\BlackHole\Scripts\MouseOrbit.cs" />
     <Compile Include="Assets\Scripts\Ui\StarTab.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\AntiAliasing\SMAA\SMAA.cs" />
     <Compile Include="Assets\OtherUiManager.cs" />
@@ -86,6 +92,7 @@
     <Compile Include="Assets\Scripts\PlanetDataManager.cs" />
     <Compile Include="Assets\Scripts\Ui\PlanetImageUi.cs" />
     <Compile Include="Assets\Scripts\Ui\ScreenShotScript.cs" />
+    <Compile Include="Assets\BlackHole\Scripts\LookAt.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\Common\MinAttribute.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\AntiAliasing\AntiAliasing.cs" />
     <Compile Include="Assets\Scripts\Ui\UiScript.cs" />
@@ -93,13 +100,6 @@
     <Compile Include="Assets\Scripts\Ui\PlanetTab.cs" />
     <Compile Include="Assets\Scripts\Ui\PlanetUiManager.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\Common\ImageEffectHelper.cs" />
-    <Compile Include="Assets\BlackHole\Scripts\BlackHoleSphere.cs" />
-    <Compile Include="Assets\BlackHole\Scripts\MouseOrbit.cs" />
-    <Compile Include="Assets\BlackHole\Scripts\BlackHoleCamera.cs" />
-    <Compile Include="Assets\BlackHole\Scripts\LookAt.cs" />
-    <Compile Include="Assets\BlackHole\Scripts\AutoBehaviour.cs" />
-    <Compile Include="Assets\BlackHole\Scripts\AsteroidRotation.cs" />
-    <Compile Include="Assets\BlackHole\Scripts\BlackHoleRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

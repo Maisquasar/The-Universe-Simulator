@@ -61,18 +61,7 @@ public class CameraScript : MonoBehaviour
     void UpdateCameraMovements()
     {
         // Return if inside an Ui Component
-        if (mInspector.InputFileSelected) return;
-        else
-        {
-            var pointerEventData = new PointerEventData(EventSystem.current);
-            pointerEventData.position = Input.mousePosition;
-            var raycastResults = new List<RaycastResult>();
-            EventSystem.current.RaycastAll(pointerEventData, raycastResults);
-            if (raycastResults.Count > 0)
-            {
-                return;
-            }
-        }
+        if (mInspector.InputFileSelected || ClickOnUI()) return;
         mCamera.nearClipPlane = Mathf.Max(Distance * 0.000001f, 0.01f);
         Distance -= (Distance * 5) * Input.mouseScrollDelta.y * ScrollSensibility;
         Distance = Mathf.Min(Distance, 500000);
@@ -163,20 +152,26 @@ public class CameraScript : MonoBehaviour
         else return 0.0f;
     }
 
-    public void SelectPlanet(PlanetData planet)
+    public bool ClickOnUI()
     {
-        if (mInspector.InputFileSelected) return;
-        else
+        var pointerEventData = new PointerEventData(EventSystem.current);
+        pointerEventData.position = Input.mousePosition;
+        var raycastResults = new List<RaycastResult>();
+        EventSystem.current.RaycastAll(pointerEventData, raycastResults);
+        if (raycastResults.Count > 0)
         {
-            var pointerEventData = new PointerEventData(EventSystem.current);
-            pointerEventData.position = Input.mousePosition;
-            var raycastResults = new List<RaycastResult>();
-            EventSystem.current.RaycastAll(pointerEventData, raycastResults);
-            if (raycastResults.Count > 0)
+            foreach (var r in raycastResults)
             {
-                return;
+                if (r.gameObject.layer == 5/*UI tag*/)
+                    return true;
             }
         }
+        return false;
+    }
+
+    public void SelectPlanet(PlanetData planet)
+    {
+        if (mInspector.InputFileSelected || ClickOnUI()) return;
         switch (CurrentTool)
         {
             case Tool.SELECTION:

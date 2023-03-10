@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UiScript : MonoBehaviour
 {
@@ -20,18 +21,69 @@ public class UiScript : MonoBehaviour
     [SerializeField] StarTab mStarTab;
     [SerializeField] OtherTab mOtherTab;
 
+    [SerializeField] GameObject mTextContainer;
+    [SerializeField] GameObject mTextExample;
+
     Tab mCurrentTab = Tab.NONE;
+    PlanetDataManager manager;
+    Dictionary<PlanetData, TextMeshProUGUI> texts = new Dictionary<PlanetData, TextMeshProUGUI>();
 
     // Start is called before the first frame update
     void Start()
     {
         ShowPlanetsSelection();
+        manager = FindObjectOfType<PlanetDataManager>();
+        mTextExample.SetActive(false);
     }
-
     // Update is called once per frame
     void Update()
     {
+        foreach (var text in texts)
+        {
+            var position = Camera.main.WorldToScreenPoint(text.Key.transform.position);
+            if (position.z < 0)
+            {
+                text.Value.gameObject.SetActive(false);
+                continue;
+            }
+            else
+            {
+                text.Value.gameObject.SetActive(true);
+            }
+            position.z = 0;
+            text.Value.transform.position = position;
+        }
+    }
 
+    public void AddText(PlanetData planet)
+    {
+        if (!texts.ContainsKey(planet))
+        {
+            var obj = Instantiate(mTextExample, mTextContainer.transform);
+            obj.SetActive(true);
+            obj.name = planet.PlanetName + "_text";
+            var TextComponent = obj.GetComponent<TextMeshProUGUI>();
+            TextComponent.text = planet.PlanetName;
+            texts.Add(planet, TextComponent);
+        }
+    }
+
+    public void RemoveText(PlanetData planet)
+    {
+        if (!planet)
+            return;
+        if (texts.ContainsKey(planet))
+        {
+            if (texts[planet])
+            {
+                var obj = texts[planet].gameObject;
+                texts.Remove(planet);
+                if (obj)
+                {
+                    Destroy(obj);
+                }
+            }
+        }
     }
 
     public void ShowPlanetsSelection()

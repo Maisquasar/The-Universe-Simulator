@@ -67,7 +67,10 @@
     <Compile Include="Assets\Scripts\Ui\ToolUi.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Scripts\ScreenOverlay.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Scripts\BloomOptimized.cs" />
+    <Compile Include="Assets\BlackHole\Scripts\AutoBehaviour.cs" />
+    <Compile Include="Assets\BlackHole\Scripts\AsteroidRotation.cs" />
     <Compile Include="Assets\Scripts\DVec3.cs" />
+    <Compile Include="Assets\BlackHole\Scripts\BlackHoleCamera.cs" />
     <Compile Include="Assets\Scripts\PlanetData.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Scripts\Quads.cs" />
     <Compile Include="Assets\Scripts\GravityFieldRenderer.cs" />
@@ -75,8 +78,11 @@
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Scripts\Triangles.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Utility\FPSCounter.cs" />
     <Compile Include="Assets\Scripts\PlanetNameScript.cs" />
+    <Compile Include="Assets\BlackHole\Scripts\BlackHoleSphere.cs" />
+    <Compile Include="Assets\BlackHole\Scripts\BlackHoleRenderer.cs" />
     <Compile Include="Assets\OtherTab.cs" />
     <Compile Include="Assets\Scripts\Ui\StarUiManager.cs" />
+    <Compile Include="Assets\BlackHole\Scripts\MouseOrbit.cs" />
     <Compile Include="Assets\Scripts\Ui\StarTab.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\AntiAliasing\SMAA\SMAA.cs" />
     <Compile Include="Assets\OtherUiManager.cs" />
@@ -86,6 +92,7 @@
     <Compile Include="Assets\Scripts\PlanetDataManager.cs" />
     <Compile Include="Assets\Scripts\Ui\PlanetImageUi.cs" />
     <Compile Include="Assets\Scripts\Ui\ScreenShotScript.cs" />
+    <Compile Include="Assets\BlackHole\Scripts\LookAt.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\Common\MinAttribute.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\AntiAliasing\AntiAliasing.cs" />
     <Compile Include="Assets\Scripts\Ui\UiScript.cs" />
@@ -97,6 +104,7 @@
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets\BlackHole\Shader\BlackHoleNoDupli.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\MultiPassHollywoodFlares.shader" />
     <None Include="Assets\Materials\Testogus.shader" />
@@ -112,6 +120,7 @@
     <None Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Shaders\Contrast Stretch\Adaptation.shader" />
     <None Include="Assets\Materials\Sun.shader" />
     <None Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\AntiAliasing\SMAA\Resources\SMAA.shader" />
+    <None Include="Assets\BlackHole\Shader\Resources\BlackHoleDistortion.shader" />
     <None Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\LensFlareCreate.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Shaders\ScreenSpaceRaytrace.cginc" />
@@ -124,6 +133,7 @@
     <None Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlendOneOne.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
     <None Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BrightPassFilter.shader" />
+    <None Include="Assets\BlackHole\Shader\BlackHoleSphere.shader" />
     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
     <None Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\MobileBloom.shader" />
@@ -136,6 +146,7 @@
     <None Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\SeparableBlurPlus.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
     <None Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\MobileBlur.shader" />
+    <None Include="Assets\BlackHole\Shader\BlackHole.shader" />
     <None Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BrightPassFilter2.shader" />
     <None Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Shaders\PrepareSunShaftsBlur.shader" />
     <None Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Shaders\ShowAlphaChannel.shader" />

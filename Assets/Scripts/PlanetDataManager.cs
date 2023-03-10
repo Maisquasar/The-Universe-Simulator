@@ -21,7 +21,6 @@ public class PlanetDataManager : MonoBehaviour
 
     public List<PlanetData> GetAllPlanets() { return Planets; }
 
-    private UiScript mCanvas;
 
     // Start is called before the first frame update
     void Start()
@@ -31,6 +30,7 @@ public class PlanetDataManager : MonoBehaviour
         CameraLerpTime = mainCam.CameraLerpTime;
     }
 
+    private UiScript mCanvas;
     private void Awake()
     {
         mCanvas = FindObjectOfType<UiScript>();

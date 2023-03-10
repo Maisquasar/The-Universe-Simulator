@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{C75B1850-15EC-26E6-8F18-D1A439EAE5E8}</ProjectGuid>
+    <ProjectGuid>{DFBEDD94-864D-78AC-32F5-BA19C9BF1AAC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -75,9 +75,11 @@
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Scripts\Triangles.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Utility\FPSCounter.cs" />
     <Compile Include="Assets\Scripts\PlanetNameScript.cs" />
+    <Compile Include="Assets\OtherTab.cs" />
     <Compile Include="Assets\Scripts\Ui\StarUiManager.cs" />
     <Compile Include="Assets\Scripts\Ui\StarTab.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\AntiAliasing\SMAA\SMAA.cs" />
+    <Compile Include="Assets\OtherUiManager.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Scripts\PostEffectsBase.cs" />
     <Compile Include="Assets\Scripts\Ui\Inspector.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Scripts\ImageEffectBase.cs" />
@@ -91,8 +93,6 @@
     <Compile Include="Assets\Scripts\Ui\PlanetTab.cs" />
     <Compile Include="Assets\Scripts\Ui\PlanetUiManager.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\Common\ImageEffectHelper.cs" />
-    <Compile Include="Assets\OtherTab.cs" />
-    <Compile Include="Assets\OtherUiManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

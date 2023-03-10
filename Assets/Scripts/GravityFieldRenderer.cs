@@ -3,13 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using Assets.Scripts;
 
+public enum RenderType : ushort
+{
+    Grid2D = 0,
+    Grid3D = 1,
+    Arrow3D = 2
+}
+
 public class GravityFieldRenderer : MonoBehaviour
 {
     private PlanetDataManager mPlanetDataManager;
 
     public Mesh mesh;
     public int PointCount = 16;
-    public Vector2 PointSize = new Vector2(5,5);
+    public double PointSize = 5.0;
     public double ScaleParameter = 10000.0f;
     public bool ShouldUpdateGrid = true;
 
@@ -32,7 +39,7 @@ public class GravityFieldRenderer : MonoBehaviour
             for (int j = 0; j < PointCount; j++)
             {
                 int index = i * PointCount + j;
-                grid[index] = new Vector3((i * 1.0f / (PointCount - 1) - 0.5f) * PointSize.x, 0, (j * 1.0f / (PointCount - 1) - 0.5f) * PointSize.y);
+                grid[index] = new Vector3((i * 1.0f / (PointCount - 1) - 0.5f) * (float)PointSize, 0, (j * 1.0f / (PointCount - 1) - 0.5f) * (float)PointSize);
                 double force = mPlanetDataManager.GetAccelForceAtPoint(mPlanetDataManager.GetFocusLerped() + new DVec3(grid[index]));
                 grid[index].y = (float)(-force * ScaleParameter);
                 if (i != 0 && j != 0)

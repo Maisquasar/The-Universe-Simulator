@@ -18,6 +18,8 @@ public class PlanetDataManager : MonoBehaviour
     private CameraScript mainCam;
     [SerializeField] private float lerpTime = 0.0f;
     [SerializeField] private DVec3 lastLerpedPos = new DVec3();
+    [SerializeField] public bool ShowAllTrajectories = false;
+    private bool TrajectoriesState = false;
 
     public List<PlanetData> GetAllPlanets() { return Planets; }
 
@@ -56,6 +58,15 @@ public class PlanetDataManager : MonoBehaviour
 
     private void Update()
     {
+        if (TrajectoriesState != ShowAllTrajectories)
+        {
+            if (!ShowAllTrajectories) foreach (var planet in Planets)
+            {
+                if (!planet.Placed || planet == focusedPlanet) continue;
+                planet.HideTrajectory();
+            }
+            TrajectoriesState = ShowAllTrajectories;
+        }
         if (lerpTime > 0)
         {
             lerpTime -= Time.deltaTime;
@@ -71,6 +82,7 @@ public class PlanetDataManager : MonoBehaviour
             if (!planet.Placed || planet == focusedPlanet) continue;
             planet.LerpedPosition = planet.PhysicPosition + planet.Velocity * delta;
             planet.transform.position = (planet.LerpedPosition - GetFocusLerped()).AsVector();
+            if (ShowAllTrajectories) planet.DrawTrajectory();
         }
         if (focusedPlanet)
         {
@@ -94,7 +106,7 @@ public class PlanetDataManager : MonoBehaviour
         if (focusedPlanet == planet) return;
         if (focusedPlanet)
         {
-            focusedPlanet.HideTrajectory();
+            if (!ShowAllTrajectories) focusedPlanet.HideTrajectory();
             lastLerpedPos = focusedPlanet.LerpedPosition;
         }
         else

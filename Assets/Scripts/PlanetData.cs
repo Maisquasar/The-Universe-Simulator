@@ -98,6 +98,7 @@ public class PlanetData : MonoBehaviour
 
     public void DrawTrajectory()
     {
+        if (!TrajectoryDrawer.enabled) TrajectoryDrawer.enabled = true;
         TrajectoryDrawer.positionCount = Mathf.Min(pathSize, path.Length)+1;
         int index = 0;
         for (int i = Mathf.Max(pathSize-path.Length, 0); i < pathSize; i++)

@@ -54,7 +54,7 @@ public class UiScript : MonoBehaviour
             text.Value.transform.position = position;
         }
     }
-    
+
     public void AddText(PlanetData planet)
     {
         if (!texts.ContainsKey(planet))
@@ -70,11 +70,19 @@ public class UiScript : MonoBehaviour
 
     public void RemoveText(PlanetData planet)
     {
+        if (!planet)
+            return;
         if (texts.ContainsKey(planet))
         {
-            var obj = texts[planet].gameObject;
-            texts.Remove(planet);
-            Destroy(obj);
+            if (texts[planet])
+            {
+                var obj = texts[planet].gameObject;
+                texts.Remove(planet);
+                if (obj)
+                {
+                    Destroy(obj);
+                }
+            }
         }
     }
 

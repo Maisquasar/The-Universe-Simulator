@@ -21,12 +21,19 @@ public class PlanetDataManager : MonoBehaviour
 
     public List<PlanetData> GetAllPlanets() { return Planets; }
 
+    private UiScript mCanvas;
+
     // Start is called before the first frame update
     void Start()
     {
         timeSinceLastFixedUpdate = Time.realtimeSinceStartup;
         mainCam = Camera.main.GetComponent<CameraScript>();
         CameraLerpTime = mainCam.CameraLerpTime;
+    }
+
+    private void Awake()
+    {
+        mCanvas = FindObjectOfType<UiScript>();
     }
 
     // Update is called once per frame
@@ -82,10 +89,12 @@ public class PlanetDataManager : MonoBehaviour
     {
         if (!Planets.Contains(planet))
             Planets.Add(planet);
+        mCanvas.AddText(planet);
     }
 
     public void DeletePlanet(PlanetData planet)
     {
+        mCanvas.RemoveText(planet);
         Planets.Remove(planet);
     }
 

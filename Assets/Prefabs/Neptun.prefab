@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &8748970261280491552
+--- !u!1001 &6436237935625936739
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -9,35 +9,35 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2053399285435558994, guid: c697406ea6fc89c45ae8d9ccb6cb9b9a, type: 3}
       propertyPath: Mass
-      value: 14.5
+      value: 17.147
       objectReference: {fileID: 0}
     - target: {fileID: 2053399285435558994, guid: c697406ea6fc89c45ae8d9ccb6cb9b9a, type: 3}
       propertyPath: Speed
-      value: 6.7967
+      value: 5.43
       objectReference: {fileID: 0}
     - target: {fileID: 2053399285435558994, guid: c697406ea6fc89c45ae8d9ccb6cb9b9a, type: 3}
       propertyPath: Radius
-      value: 25362
+      value: 24622
       objectReference: {fileID: 0}
     - target: {fileID: 2053399285435558994, guid: c697406ea6fc89c45ae8d9ccb6cb9b9a, type: 3}
       propertyPath: Density
-      value: 1.27
+      value: 1.64
       objectReference: {fileID: 0}
     - target: {fileID: 2053399285435558994, guid: c697406ea6fc89c45ae8d9ccb6cb9b9a, type: 3}
       propertyPath: Gravity
-      value: 9.81
+      value: 11.15
       objectReference: {fileID: 0}
     - target: {fileID: 2053399285435558994, guid: c697406ea6fc89c45ae8d9ccb6cb9b9a, type: 3}
       propertyPath: PlanetName
-      value: Uranus
+      value: Neptune
       objectReference: {fileID: 0}
     - target: {fileID: 8832406666643970452, guid: c697406ea6fc89c45ae8d9ccb6cb9b9a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: b34ef3aee77b3c849a5515a124bfa8e8, type: 2}
+      objectReference: {fileID: 2100000, guid: d95a85eabd31ab04f8e34af14f464c3f, type: 2}
     - target: {fileID: 8832406666645964628, guid: c697406ea6fc89c45ae8d9ccb6cb9b9a, type: 3}
       propertyPath: m_Name
-      value: Uranus
+      value: Neptun
       objectReference: {fileID: 0}
     - target: {fileID: 8832406666646264692, guid: c697406ea6fc89c45ae8d9ccb6cb9b9a, type: 3}
       propertyPath: m_RootOrder
@@ -45,15 +45,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8832406666646264692, guid: c697406ea6fc89c45ae8d9ccb6cb9b9a, type: 3}
       propertyPath: m_LocalScale.x
-      value: 2.5362
+      value: 2.4622
       objectReference: {fileID: 0}
     - target: {fileID: 8832406666646264692, guid: c697406ea6fc89c45ae8d9ccb6cb9b9a, type: 3}
       propertyPath: m_LocalScale.y
-      value: 2.5362
+      value: 2.4622
       objectReference: {fileID: 0}
     - target: {fileID: 8832406666646264692, guid: c697406ea6fc89c45ae8d9ccb6cb9b9a, type: 3}
       propertyPath: m_LocalScale.z
-      value: 2.5362
+      value: 2.4622
       objectReference: {fileID: 0}
     - target: {fileID: 8832406666646264692, guid: c697406ea6fc89c45ae8d9ccb6cb9b9a, type: 3}
       propertyPath: m_LocalPosition.x

@@ -33,6 +33,31 @@ public class CameraScript : MonoBehaviour
 
     private Camera mCamera;
 
+    [SerializeField] GameObject mCircle;
+
+    private UiScript mCanvas;
+    private void Awake()
+    {
+        mCanvas = FindObjectOfType<UiScript>();
+        mCircle.SetActive(false);
+    }
+
+    public void SetHovered(PlanetData planet)
+    {
+        Hovered = planet;
+        if (planet)
+            mCircle.SetActive(true);
+        else
+            mCircle.SetActive(false);
+
+    }
+
+    public void SetCircleRadius(float radius)
+    {
+        CircleRadius = radius;
+        var rect = mCircle.GetComponent<RectTransform>().sizeDelta = new Vector2(100 * radius / 75f, 100 * radius / 75f);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -41,6 +66,18 @@ public class CameraScript : MonoBehaviour
         mInspector = FindObjectOfType<Inspector>();
         mPlanetDataManager = FindObjectOfType<PlanetDataManager>();
         mCamera = GetComponent<Camera>();
+        SetCircleRadius(50);
+    }
+
+    public float CircleRadius = 1000.0f;
+    public bool IsInside(float circle_x, float circle_y,
+                              float rad, float x, float y)
+    {
+        if ((x - circle_x) * (x - circle_x) +
+            (y - circle_y) * (y - circle_y) <= rad * rad)
+            return true;
+        else
+            return false;
     }
 
     // Update is called once per frame
@@ -55,6 +92,15 @@ public class CameraScript : MonoBehaviour
         {
             Dragged.EndDrag();
             Dragged = null;
+        }
+        if (Hovered && mCircle.activeSelf)
+        {
+            var position = Camera.main.WorldToScreenPoint(Hovered.transform.position);
+            if (position.z < 0)
+            {
+                mCircle.SetActive(false);
+            }
+            mCircle.transform.position = new Vector3(position.x, position.y, 0);
         }
     }
 

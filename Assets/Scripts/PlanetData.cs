@@ -27,8 +27,6 @@ public class PlanetData : MonoBehaviour
 
     public Material trajectoryMat;
 
-    private LineRenderer LineDrawer;
-
     private LineRenderer TrajectoryDrawer;
 
     private CameraScript mCamera;
@@ -49,13 +47,6 @@ public class PlanetData : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        var objToSpawn = new GameObject("Circle");
-        objToSpawn.transform.parent = gameObject.transform;
-        LineDrawer = objToSpawn.AddComponent<LineRenderer>();
-        LineDrawer.startWidth = 0.01f;
-        LineDrawer.endWidth = 0.01f;
-        LineDrawer.material = new Material(Shader.Find("Unlit/Texture"));
-        CreateCircle();
         mCamera = Camera.main.GetComponent<CameraScript>();
 
         manager = FindObjectOfType<PlanetDataManager>();
@@ -129,55 +120,20 @@ public class PlanetData : MonoBehaviour
             manager.DeletePlanet(this);
     }
 
-    void CreateCircle()
-    {
-        float Distance = Vector3.Distance(Camera.main.transform.position, transform.position);
-        float width = Mathf.Max(0.004f * Distance, 0.004f);
-        LineDrawer.startWidth = width;
-        LineDrawer.endWidth = width;
-        Theta = 0f;
-        int Size = (int)((1f / ThetaScale) + 1f);
-        LineDrawer.positionCount = (Size);
-        for (int i = 0; i < Size; i++)
-        {
-            Theta += (2.0f * Mathf.PI * ThetaScale);
-            float x = CircleRadius * Mathf.Cos(Theta);
-            float y = CircleRadius * Mathf.Sin(Theta);
-            LineDrawer.SetPosition(i, (transform.position + Camera.main.transform.rotation * new Vector3(x, y, 0)));
-        }
-    }
-    [Header("Circle Ui")]
-    public float ThetaScale = 0.001f;
-    public float CircleRadius;
-    private float Theta = 0f;
-    bool IsInside(float circle_x, float circle_y, float circle_z,
-                              float rad, float x, float y, float z)
-    {
-        if ((x - circle_x) * (x - circle_x) +
-            (y - circle_y) * (y - circle_y) +
-            (z - circle_z) * (z - circle_z) <= rad * rad)
-            return true;
-        else
-            return false;
-    }
-
     void Update()
     {
-        var screenPoint = transform.position;
+        var mouse = Input.mousePosition;
         var Distance = Vector3.Distance(Camera.main.transform.position, transform.position);
-        CircleRadius = Mathf.Max(Distance * 0.05f, 0.02f);
-        var mouse = Camera.main.ScreenPointToRay(Input.mousePosition).GetPoint(Distance);
-        bool inside = IsInside(screenPoint.x, screenPoint.y, screenPoint.z, CircleRadius, mouse.x, mouse.y, mouse.z);
+        var screenPoint = Camera.main.WorldToScreenPoint(transform.position);
+        bool inside = mCamera.IsInside(screenPoint.x, screenPoint.y, mCamera.CircleRadius, mouse.x, mouse.y);
         if (inside)
         {
             if (mCamera.Hovered == null || (mCamera.Hovered != this && Distance < Vector3.Distance(Camera.main.transform.position, mCamera.Hovered.transform.position)))
             {
-                mCamera.Hovered = this;
-                LineDrawer.gameObject.SetActive(true);
+                mCamera.SetHovered(this);
             }
             if (mCamera.Hovered == this)
             {
-                CreateCircle();
                 if (Input.GetMouseButtonDown(0))
                 {
                     this.OnMouseDown();
@@ -185,11 +141,10 @@ public class PlanetData : MonoBehaviour
             }
 
         }
-        if (!inside && mCamera.Hovered == this || mCamera.Hovered != this && LineDrawer.gameObject.activeSelf)
+        if (!inside && mCamera.Hovered == this || mCamera.Hovered != this)
         {
             if (mCamera.Hovered == this)
-                mCamera.Hovered = null;
-            LineDrawer.gameObject.SetActive(false);
+                mCamera.SetHovered(null);
         }
     }
 

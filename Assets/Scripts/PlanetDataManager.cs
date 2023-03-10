@@ -8,7 +8,7 @@ public class PlanetDataManager : MonoBehaviour
     const double GC = 6.67430e-11;
 
     [SerializeField] private List<PlanetData> Planets;
-    [SerializeField] private double TimeScale = 1.0f;
+    [SerializeField] public double TimeScale = 1.0f;
     [SerializeField] private int TrajectoryUpdatePeriod = 10;
     [SerializeField] private float CameraLerpTime = 1.0f;
     private int currentFrame = 0;

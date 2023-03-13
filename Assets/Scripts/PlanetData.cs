@@ -14,7 +14,7 @@ public class PlanetData : MonoBehaviour
     public float Mass = 1.0f;
 
     [Tooltip("The Radius of the planet in Km")]
-    public float Radius = 6371.0f;
+    public float radius = 6371.0f;
 
     [Tooltip("The Desnity of the planet in g/cm^3")]
     public float Density = 5.51f;
@@ -26,6 +26,21 @@ public class PlanetData : MonoBehaviour
     public float Gravity = 9.81f;
 
     public Material trajectoryMat;
+
+    bool mDestroy = false;
+
+    public float Radius {
+        set
+        {
+            radius = value;
+            var scale = value / 10000f;
+            transform.localScale = new Vector3(scale, scale, scale);
+        }
+        get
+        {
+            return radius;
+        }
+    }
 
     private LineRenderer TrajectoryDrawer;
 
@@ -161,25 +176,31 @@ public class PlanetData : MonoBehaviour
         TrajectoryDrawer.enabled = false;
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        /*
-          var planet = collision.gameObject.GetComponent<PlanetData>();
-        if (planet)
+        var planet = other.gameObject.GetComponent<PlanetData>();
+        if (planet && !mDestroy && !planet.mDestroy)
         {
+            if (!planet.Placed || !this.Placed)
+                return;
+            print($"Planet {other.name} hit {name}");
             if (planet.Mass > Mass)
             {
                 planet.Mass += Mass;
-                planet.Radius += Radius;
+                planet.radius += Radius;
+                mDestroy = true;
                 Destroy(this.gameObject);
+                Destroy(this);
             }
             else
             {
                 Mass += planet.Mass;
                 Radius += planet.Radius;
+                other.isTrigger = false;
+                planet.mDestroy = true;
                 Destroy(planet.gameObject);
+                Destroy(planet);
             }
         }
-        */
     }
 }

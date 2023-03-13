@@ -12,6 +12,10 @@ PrefabInstance:
       value: 0.0123
       objectReference: {fileID: 0}
     - target: {fileID: 2169272418288880140, guid: 03b85ce413fde4342b7220c8fe012266, type: 3}
+      propertyPath: radius
+      value: 1740
+      objectReference: {fileID: 0}
+    - target: {fileID: 2169272418288880140, guid: 03b85ce413fde4342b7220c8fe012266, type: 3}
       propertyPath: Gravity
       value: 9.81
       objectReference: {fileID: 0}

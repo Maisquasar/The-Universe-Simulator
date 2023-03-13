@@ -84,6 +84,10 @@ PrefabInstance:
       value: 617000000
       objectReference: {fileID: 0}
     - target: {fileID: 6570221198078183659, guid: 552a5b3dce6724e418a0aa0cf0cfeafb, type: 3}
+      propertyPath: radius
+      value: 671000000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6570221198078183659, guid: 552a5b3dce6724e418a0aa0cf0cfeafb, type: 3}
       propertyPath: Density
       value: 0.0000000235
       objectReference: {fileID: 0}

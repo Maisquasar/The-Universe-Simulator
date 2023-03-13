@@ -90,9 +90,9 @@ public class PlanetData : MonoBehaviour
     public void DrawTrajectory()
     {
         if (!TrajectoryDrawer.enabled) TrajectoryDrawer.enabled = true;
-        TrajectoryDrawer.positionCount = Mathf.Min(pathSize, path.Length)+1;
+        TrajectoryDrawer.positionCount = Mathf.Min(pathSize, path.Length) + 1;
         int index = 0;
-        for (int i = Mathf.Max(pathSize-path.Length, 0); i < pathSize; i++)
+        for (int i = Mathf.Max(pathSize - path.Length, 0); i < pathSize; i++)
         {
             TrajectoryDrawer.SetPosition(index, (path[i % path.Length] - manager.GetFocusLerped()).AsVector());
             index++;
@@ -150,7 +150,7 @@ public class PlanetData : MonoBehaviour
 
     public void OnClick()
     {
-        if (mCamera.Selected == this)
+        if (mCamera.Selected == this && mCamera.CurrentTool == CameraScript.Tool.SELECTION)
             return;
         TrajectoryDrawer.enabled = true;
         mCamera.SelectPlanet(this);
@@ -159,5 +159,27 @@ public class PlanetData : MonoBehaviour
     public void HideTrajectory()
     {
         TrajectoryDrawer.enabled = false;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        /*
+          var planet = collision.gameObject.GetComponent<PlanetData>();
+        if (planet)
+        {
+            if (planet.Mass > Mass)
+            {
+                planet.Mass += Mass;
+                planet.Radius += Radius;
+                Destroy(this.gameObject);
+            }
+            else
+            {
+                Mass += planet.Mass;
+                Radius += planet.Radius;
+                Destroy(planet.gameObject);
+            }
+        }
+        */
     }
 }

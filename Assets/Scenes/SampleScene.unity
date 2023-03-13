@@ -688,6 +688,10 @@ PrefabInstance:
       value: Uranus
       objectReference: {fileID: 0}
     - target: {fileID: 7283927930726114418, guid: e90028e2c48486540b72111262336806, type: 3}
+      propertyPath: Placed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7283927930726114418, guid: e90028e2c48486540b72111262336806, type: 3}
       propertyPath: Velocity.z
       value: 0.00067967
       objectReference: {fileID: 0}
@@ -742,6 +746,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1717482644}
     m_Modifications:
+    - target: {fileID: 3845165645123250487, guid: d41a5f86b10a69f46a713e7e6e9beea9, type: 3}
+      propertyPath: Placed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3845165645123250487, guid: d41a5f86b10a69f46a713e7e6e9beea9, type: 3}
       propertyPath: Velocity.z
       value: 0.0047362
@@ -1987,6 +1995,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1717482644}
     m_Modifications:
     - target: {fileID: 2285073270341346954, guid: bc462272f263cc048ba888cbca30fbe9, type: 3}
+      propertyPath: Placed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2285073270341346954, guid: bc462272f263cc048ba888cbca30fbe9, type: 3}
       propertyPath: Velocity.z
       value: 0.00096407
       objectReference: {fileID: 0}
@@ -2229,6 +2241,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1717482644}
     m_Modifications:
+    - target: {fileID: 3388247378589102968, guid: 38dea136e495c4e4da188557e1ab5798, type: 3}
+      propertyPath: Placed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3388247378589102968, guid: 38dea136e495c4e4da188557e1ab5798, type: 3}
       propertyPath: Velocity.z
       value: 0.00130585
@@ -3669,6 +3685,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1717482644}
     m_Modifications:
     - target: {fileID: 3335802642151490988, guid: 390f1df93839c48469b34c6710148ef3, type: 3}
+      propertyPath: Placed
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3335802642151490988, guid: 390f1df93839c48469b34c6710148ef3, type: 3}
       propertyPath: Velocity.z
       value: 0.00240802
       objectReference: {fileID: 0}
@@ -4658,6 +4678,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1717482644}
     m_Modifications:
+    - target: {fileID: 1422346108424530253, guid: 6474acc57a465664bad68272965db206, type: 3}
+      propertyPath: Placed
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1422346108424530253, guid: 6474acc57a465664bad68272965db206, type: 3}
       propertyPath: Velocity.z
       value: 0.003502571
@@ -10207,6 +10231,10 @@ PrefabInstance:
     - target: {fileID: 2576374943841158167, guid: 2756086d3901dcc478bdbe7ef1a60cbc, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4984710216127738673, guid: 2756086d3901dcc478bdbe7ef1a60cbc, type: 3}
+      propertyPath: Placed
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4984710216127738673, guid: 2756086d3901dcc478bdbe7ef1a60cbc, type: 3}
       propertyPath: Velocity.z

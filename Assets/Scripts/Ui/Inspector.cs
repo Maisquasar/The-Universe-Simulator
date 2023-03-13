@@ -12,6 +12,12 @@ public class Inspector : MonoBehaviour
     public TMP_InputField IPlanetName;
     public TMP_InputField IPlanetRadius;
     public TMP_InputField IPlanetMass;
+    public TMP_InputField IPlanetPositionX;
+    public TMP_InputField IPlanetPositionY;
+    public TMP_InputField IPlanetPositionZ;
+    public TMP_InputField IPlanetVelocityX;
+    public TMP_InputField IPlanetVelocityY;
+    public TMP_InputField IPlanetVelocityZ;
 
     [System.NonSerialized] public bool InputFileSelected = false;
     private CameraScript mCamera;
@@ -27,6 +33,13 @@ public class Inspector : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!mCamera.Selected || InputFileSelected) return;
+        IPlanetPositionX.text = mCamera.Selected.PhysicPosition.x.ToString();
+        IPlanetPositionY.text = mCamera.Selected.PhysicPosition.y.ToString();
+        IPlanetPositionZ.text = mCamera.Selected.PhysicPosition.z.ToString();
+        IPlanetVelocityX.text = mCamera.Selected.Velocity.x.ToString();
+        IPlanetVelocityY.text = mCamera.Selected.Velocity.y.ToString();
+        IPlanetVelocityZ.text = mCamera.Selected.Velocity.z.ToString();
     }
 
     public void NewSelected(PlanetData selected)
@@ -108,5 +121,50 @@ public class Inspector : MonoBehaviour
         {
             mCamera.Selected.Mass = result;
         }
+    }
+
+    private void SetValueD(TMP_InputField field, ref double value)
+    {
+        double result;
+        if (double.TryParse(field.text, out result))
+        {
+           value = result;
+        }
+        else
+        {
+            field.text = value.ToString();
+        }
+    }
+
+    private void SetValueF(TMP_InputField field, ref float value)
+    {
+        float result;
+        if (float.TryParse(field.text, out result))
+        {
+            value = result;
+        }
+        else
+        {
+            field.text = value.ToString();
+        }
+    }
+
+    public void PlanetPositionEnter()
+    {
+        if (!mCamera.Selected) return;
+
+        SetValueD(IPlanetPositionX, ref mCamera.Selected.PhysicPosition.x);
+        SetValueD(IPlanetPositionY, ref mCamera.Selected.PhysicPosition.y);
+        SetValueD(IPlanetPositionZ, ref mCamera.Selected.PhysicPosition.z);
+    }
+
+
+    public void PlanetVelocityEnter()
+    {
+        if (!mCamera.Selected) return;
+
+        SetValueD(IPlanetVelocityX, ref mCamera.Selected.Velocity.x);
+        SetValueD(IPlanetVelocityY, ref mCamera.Selected.Velocity.y);
+        SetValueD(IPlanetVelocityZ, ref mCamera.Selected.Velocity.z);
     }
 }

@@ -7,57 +7,13 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2053399285435558994, guid: c697406ea6fc89c45ae8d9ccb6cb9b9a, type: 3}
-      propertyPath: Mass
-      value: 33306040
-      objectReference: {fileID: 0}
-    - target: {fileID: 2053399285435558994, guid: c697406ea6fc89c45ae8d9ccb6cb9b9a, type: 3}
-      propertyPath: Radius
-      value: 100000
-      objectReference: {fileID: 0}
-    - target: {fileID: 2053399285435558994, guid: c697406ea6fc89c45ae8d9ccb6cb9b9a, type: 3}
-      propertyPath: Density
-      value: 1.84e+12
-      objectReference: {fileID: 0}
-    - target: {fileID: 2053399285435558994, guid: c697406ea6fc89c45ae8d9ccb6cb9b9a, type: 3}
-      propertyPath: Gravity
-      value: 1.52e+11
-      objectReference: {fileID: 0}
-    - target: {fileID: 2053399285435558994, guid: c697406ea6fc89c45ae8d9ccb6cb9b9a, type: 3}
-      propertyPath: PlanetName
-      value: BlackHole
-      objectReference: {fileID: 0}
-    - target: {fileID: 2053399285435558994, guid: c697406ea6fc89c45ae8d9ccb6cb9b9a, type: 3}
-      propertyPath: trajectoryMat
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 8832406666642873172, guid: c697406ea6fc89c45ae8d9ccb6cb9b9a, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 4300000, guid: 385dce090ddd0a2479b49a92486a9983, type: 2}
-    - target: {fileID: 8832406666643970452, guid: c697406ea6fc89c45ae8d9ccb6cb9b9a, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 2f5e7afb8529e584a8842f593318498a, type: 2}
     - target: {fileID: 8832406666645964628, guid: c697406ea6fc89c45ae8d9ccb6cb9b9a, type: 3}
       propertyPath: m_Name
-      value: BlackHole 1
+      value: BlackHole
       objectReference: {fileID: 0}
     - target: {fileID: 8832406666646264692, guid: c697406ea6fc89c45ae8d9ccb6cb9b9a, type: 3}
       propertyPath: m_RootOrder
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8832406666646264692, guid: c697406ea6fc89c45ae8d9ccb6cb9b9a, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 5.449591
-      objectReference: {fileID: 0}
-    - target: {fileID: 8832406666646264692, guid: c697406ea6fc89c45ae8d9ccb6cb9b9a, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 5.449591
-      objectReference: {fileID: 0}
-    - target: {fileID: 8832406666646264692, guid: c697406ea6fc89c45ae8d9ccb6cb9b9a, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 5.449591
       objectReference: {fileID: 0}
     - target: {fileID: 8832406666646264692, guid: c697406ea6fc89c45ae8d9ccb6cb9b9a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -101,20 +57,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c697406ea6fc89c45ae8d9ccb6cb9b9a, type: 3}
---- !u!1 &3041253874899958599 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8832406666645964628, guid: c697406ea6fc89c45ae8d9ccb6cb9b9a, type: 3}
-  m_PrefabInstance: {fileID: 5811815432730491923}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &8776994929968828670
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3041253874899958599}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 39717b2f4652fd4448867030a8917953, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

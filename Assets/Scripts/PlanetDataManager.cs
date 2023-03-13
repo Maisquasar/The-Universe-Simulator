@@ -53,12 +53,16 @@ public class PlanetDataManager : MonoBehaviour
         foreach (var planet in Planets)
         {
             if (!planet.Placed) continue;
-            DVec3 newPos = planet.PhysicPosition + planet.Velocity * dt + planet.Acceleration * (dt * dt * 0.5);
-            DVec3 newAcc = GetAccelAtPoint(planet.PhysicPosition, planet);
-            DVec3 newVel = planet.Velocity + (planet.Acceleration + newAcc)*(dt*0.5);
-            planet.PhysicPosition = newPos;
-            planet.Velocity = newVel;
-            planet.Acceleration = newAcc;
+            double dt2 = dt / 10;
+            for (int i = 0; i < 10; i++)
+            {
+                DVec3 newPos = planet.PhysicPosition + planet.Velocity * dt2 + planet.Acceleration * (dt2 * dt2 * 0.5);
+                DVec3 newAcc = GetAccelAtPoint(planet.PhysicPosition, planet);
+                DVec3 newVel = planet.Velocity + (planet.Acceleration + newAcc) * (dt2 * 0.5);
+                planet.PhysicPosition = newPos;
+                planet.Velocity = newVel;
+                planet.Acceleration = newAcc;
+            }
             if (updateTrajectory) planet.PuchPositionToTrajectory();
         }
     }

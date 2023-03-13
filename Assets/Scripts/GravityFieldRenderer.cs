@@ -15,6 +15,7 @@ public class GravityFieldRenderer : MonoBehaviour
     private PlanetDataManager mPlanetDataManager;
 
     public Mesh mesh;
+    private MeshFilter filter;
     public int PointCount = 16;
     public double PointSize = 5.0;
     public double ScaleParameter = 10000.0f;
@@ -24,7 +25,8 @@ public class GravityFieldRenderer : MonoBehaviour
     {
         mesh = new Mesh();
         mesh.name = "GridMesh";
-        GetComponent<MeshFilter>().mesh = mesh;
+        filter = GetComponent<MeshFilter>();
+        filter.mesh = mesh;
         mPlanetDataManager = FindObjectOfType<PlanetDataManager>();
     }
 
@@ -59,5 +61,11 @@ public class GravityFieldRenderer : MonoBehaviour
         mesh.SetIndices(null, MeshTopology.Lines, 0);
         mesh.SetVertices(grid);
         mesh.SetIndices(indexes, MeshTopology.Lines, 0);
+
+        Transform camTransform = Camera.main.transform;
+        float distToCenter = (Camera.main.farClipPlane - Camera.main.nearClipPlane) / 2.0f;
+        Vector3 center = camTransform.position + camTransform.forward * distToCenter;
+        float extremeBound = 500.0f;
+        filter.sharedMesh.bounds = new Bounds(center, Vector3.one * extremeBound);
     }
 }

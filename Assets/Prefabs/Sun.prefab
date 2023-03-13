@@ -56,6 +56,10 @@ PrefabInstance:
       value: Sun
       objectReference: {fileID: 0}
     - target: {fileID: 6570221198078183659, guid: 552a5b3dce6724e418a0aa0cf0cfeafb, type: 3}
+      propertyPath: radius
+      value: 696340
+      objectReference: {fileID: 0}
+    - target: {fileID: 6570221198078183659, guid: 552a5b3dce6724e418a0aa0cf0cfeafb, type: 3}
       propertyPath: PlanetName
       value: Sun
       objectReference: {fileID: 0}

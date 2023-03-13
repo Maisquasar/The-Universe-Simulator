@@ -40,6 +40,8 @@ public class Inspector : MonoBehaviour
         IPlanetVelocityX.text = mCamera.Selected.Velocity.x.ToString();
         IPlanetVelocityY.text = mCamera.Selected.Velocity.y.ToString();
         IPlanetVelocityZ.text = mCamera.Selected.Velocity.z.ToString();
+        IPlanetRadius.text = mCamera.Selected.Radius.ToString();
+        IPlanetMass.text = mCamera.Selected.Mass.ToString();
     }
 
     public void NewSelected(PlanetData selected)
@@ -96,8 +98,6 @@ public class Inspector : MonoBehaviour
         if (mCamera.Selected && float.TryParse(IPlanetRadius.text, out result))
         {
             mCamera.Selected.Radius = result;
-            var scale = result / 10000f;
-            mCamera.Selected.transform.localScale = new Vector3(scale, scale, scale);
         }
         else if (mCamera.Selected)
             IPlanetRadius.text = mCamera.Selected.Radius.ToString();

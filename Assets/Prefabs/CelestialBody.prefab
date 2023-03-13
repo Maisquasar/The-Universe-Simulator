@@ -106,6 +106,7 @@ MonoBehaviour:
   Speed: 30
   Gravity: 1.52e+11
   trajectoryMat: {fileID: 10306, guid: 0000000000000000f000000000000000, type: 0}
+  Particles: {fileID: 100000, guid: 10f42fca98dc28042b22d432c3e4095b, type: 3}
   Velocity:
     x: 0
     y: 0

@@ -6427,6 +6427,7 @@ MonoBehaviour:
   PointSize: 100
   ScaleParameter: 1000000000
   ShouldUpdateGrid: 1
+  type: 0
 --- !u!33 &1080380434
 MeshFilter:
   m_ObjectHideFlags: 0

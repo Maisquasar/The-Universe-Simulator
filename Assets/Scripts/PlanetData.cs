@@ -27,6 +27,8 @@ public class PlanetData : MonoBehaviour
 
     public Material trajectoryMat;
 
+    [SerializeField] GameObject Particles;
+
     bool mDestroy = false;
 
     public float Radius {
@@ -176,7 +178,7 @@ public class PlanetData : MonoBehaviour
         TrajectoryDrawer.enabled = false;
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         var planet = other.gameObject.GetComponent<PlanetData>();
         if (planet && !mDestroy && !planet.mDestroy)
@@ -189,8 +191,11 @@ public class PlanetData : MonoBehaviour
                 planet.Mass += Mass;
                 planet.radius += Radius;
                 mDestroy = true;
+                var part = Instantiate(Particles);
+                part.transform.position = this.transform.position;
+                var main = part.GetComponent<ParticleSystem>().main;
+                main.startSize = new ParticleSystem.MinMaxCurve(this.transform.lossyScale.x, this.transform.lossyScale.x);
                 Destroy(this.gameObject);
-                Destroy(this);
             }
             else
             {
@@ -198,8 +203,11 @@ public class PlanetData : MonoBehaviour
                 Radius += planet.Radius;
                 other.isTrigger = false;
                 planet.mDestroy = true;
+                var part = Instantiate(Particles);
+                part.transform.position = planet.transform.position;
+                var main = part.GetComponent<ParticleSystem>().main;
+                main.startSize = new ParticleSystem.MinMaxCurve(this.transform.lossyScale.x, this.transform.lossyScale.x);
                 Destroy(planet.gameObject);
-                Destroy(planet);
             }
         }
     }

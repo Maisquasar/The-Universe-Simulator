@@ -2,14 +2,19 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
   m_Name: Jupiter
   m_Shader: {fileID: 4800000, guid: 543a72c43ae674441b36c43b80402166, type: 3}
-  m_ShaderKeywords: _METALLICGLOSSMAP _NORMALMAP _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
-    _SPECGLOSSMAP
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - _METALLICGLOSSMAP
+  - _NORMALMAP
+  - _SMOOTHNESS_TEXTURE_ALBEDO_CHANNEL_A
+  - _SPECGLOSSMAP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -20,6 +25,10 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BumpMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CityLightMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -75,12 +84,14 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _AtmosphereDensity: 7.41
     - _AtmosphereStrength: 4.88
     - _BumpScale: 5
+    - _CityLightIntensity: 0
     - _CloudMapSpecularity: 0.02
-    - _CloudPanSpeed: 0.55
+    - _CloudPanSpeed: 0.055
     - _Cutoff: 0.5
     - _DetailMapSpecularity: -0.94
     - _DetailNormalMapScale: 1
@@ -107,6 +118,7 @@ Material:
     - _ZWrite: 1
     m_Colors:
     - _AtmosphereColor: {r: 0.29310346, g: 0.24784485, b: 0.112068936, a: 1}
+    - _CityLightColor: {r: 1, g: 1, b: 1, a: 1}
     - _CloudColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _DetailColor: {r: 0.77205884, g: 0.77205884, b: 0.77205884, a: 1}
@@ -114,3 +126,4 @@ Material:
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _TextureColor: {r: 0.022058845, g: 0.022058845, b: 0.022058845, a: 1}
     - _node_1532: {r: 0.5017301, g: 0.8529412, b: 0.5477508, a: 1}
+  m_BuildTextureStacks: []

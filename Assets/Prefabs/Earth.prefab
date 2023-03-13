@@ -8,6 +8,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 2053399285435558994, guid: c697406ea6fc89c45ae8d9ccb6cb9b9a, type: 3}
+      propertyPath: Mass
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2053399285435558994, guid: c697406ea6fc89c45ae8d9ccb6cb9b9a, type: 3}
       propertyPath: PlanetName
       value: Earth
       objectReference: {fileID: 0}

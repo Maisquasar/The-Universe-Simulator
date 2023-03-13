@@ -13,7 +13,7 @@ public class TimeScaleUI : MonoBehaviour
 
     private PlanetDataManager manager;
     float mTimeScale = 1f;
-    public float TimeScale { set { manager.TimeScale = value; } }
+    public double TimeScale { set { manager.TimeScale = value; } }
     bool play = false;
     // Start is called before the first frame update
     void Start()

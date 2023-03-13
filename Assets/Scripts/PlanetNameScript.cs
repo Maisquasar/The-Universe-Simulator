@@ -26,8 +26,7 @@ public class PlanetNameScript : MonoBehaviour, IPointerDownHandler
 
     private void OnMouseDown()
     {
-        print("test");
-        gameObject.transform.parent.GetComponent<PlanetData>().OnMouseDown();
+        //gameObject.transform.parent.GetComponent<PlanetData>().OnMouseDown();
     }
 
     public void OnPointerDown(PointerEventData eventData)

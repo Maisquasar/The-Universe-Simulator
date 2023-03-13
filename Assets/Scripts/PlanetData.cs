@@ -136,7 +136,7 @@ public class PlanetData : MonoBehaviour
             {
                 if (Input.GetMouseButtonDown(0))
                 {
-                    this.OnMouseDown();
+                    this.OnClick();
                 }
             }
 
@@ -148,8 +148,10 @@ public class PlanetData : MonoBehaviour
         }
     }
 
-    public void OnMouseDown()
+    public void OnClick()
     {
+        if (mCamera.Selected == this)
+            return;
         TrajectoryDrawer.enabled = true;
         mCamera.SelectPlanet(this);
     }

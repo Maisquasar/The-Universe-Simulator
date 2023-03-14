@@ -15,7 +15,7 @@ public class PlanetData : MonoBehaviour
 
     [SerializeField]
     [Tooltip("The Radius of the planet in Km")]
-    private float radius = 6371.0f;
+    public float radius = 6371.0f;
 
     [Tooltip("The Desnity of the planet in g/cm^3")]
     public float Density = 5.51f;

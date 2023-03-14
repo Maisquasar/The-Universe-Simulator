@@ -84,6 +84,7 @@ public class CameraScript : MonoBehaviour
     void Update()
     {
         UpdateCameraMovements();
+        mCircle.SetActive(Hovered);
         if (Input.GetMouseButton(0) && Dragged)
         {
             PlanetImageUi.UpdateDraggedPlanet(Dragged.gameObject);

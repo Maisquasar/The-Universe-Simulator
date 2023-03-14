@@ -68,6 +68,7 @@
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Scripts\BloomAndFlares.cs" />
     <Compile Include="Assets\Scripts\Ui\ToolUi.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Scripts\ScreenOverlay.cs" />
+    <Compile Include="Assets\SceneScript.cs" />
     <Compile Include="Assets\ParticleProFX\Resources\Scripts\PPFXCountdownDestruct.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Scripts\BloomOptimized.cs" />
     <Compile Include="Assets\BlackHole\Scripts\AutoBehaviour.cs" />

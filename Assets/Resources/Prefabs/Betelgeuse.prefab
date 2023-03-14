@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &8279691772526889004
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 483179127088555448, guid: 552a5b3dce6724e418a0aa0cf0cfeafb, type: 3}
+      propertyPath: m_Range
+      value: 10000000
+      objectReference: {fileID: 0}
+    - target: {fileID: 4450187044782046509, guid: 552a5b3dce6724e418a0aa0cf0cfeafb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8afefa7f220f15c4ebc881ebaca26a93, type: 2}
+    - target: {fileID: 4450187044783816653, guid: 552a5b3dce6724e418a0aa0cf0cfeafb, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4450187044783816653, guid: 552a5b3dce6724e418a0aa0cf0cfeafb, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 67100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4450187044783816653, guid: 552a5b3dce6724e418a0aa0cf0cfeafb, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 67100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4450187044783816653, guid: 552a5b3dce6724e418a0aa0cf0cfeafb, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 67100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4450187044783816653, guid: 552a5b3dce6724e418a0aa0cf0cfeafb, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4450187044783816653, guid: 552a5b3dce6724e418a0aa0cf0cfeafb, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4450187044783816653, guid: 552a5b3dce6724e418a0aa0cf0cfeafb, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4450187044783816653, guid: 552a5b3dce6724e418a0aa0cf0cfeafb, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4450187044783816653, guid: 552a5b3dce6724e418a0aa0cf0cfeafb, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4450187044783816653, guid: 552a5b3dce6724e418a0aa0cf0cfeafb, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4450187044783816653, guid: 552a5b3dce6724e418a0aa0cf0cfeafb, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4450187044783816653, guid: 552a5b3dce6724e418a0aa0cf0cfeafb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4450187044783816653, guid: 552a5b3dce6724e418a0aa0cf0cfeafb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4450187044783816653, guid: 552a5b3dce6724e418a0aa0cf0cfeafb, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4450187044784038893, guid: 552a5b3dce6724e418a0aa0cf0cfeafb, type: 3}
+      propertyPath: m_Name
+      value: Betelgeuse
+      objectReference: {fileID: 0}
+    - target: {fileID: 6570221198078183659, guid: 552a5b3dce6724e418a0aa0cf0cfeafb, type: 3}
+      propertyPath: Mass
+      value: 3863501
+      objectReference: {fileID: 0}
+    - target: {fileID: 6570221198078183659, guid: 552a5b3dce6724e418a0aa0cf0cfeafb, type: 3}
+      propertyPath: Radius
+      value: 617000000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6570221198078183659, guid: 552a5b3dce6724e418a0aa0cf0cfeafb, type: 3}
+      propertyPath: radius
+      value: 671000000
+      objectReference: {fileID: 0}
+    - target: {fileID: 6570221198078183659, guid: 552a5b3dce6724e418a0aa0cf0cfeafb, type: 3}
+      propertyPath: Density
+      value: 0.0000000235
+      objectReference: {fileID: 0}
+    - target: {fileID: 6570221198078183659, guid: 552a5b3dce6724e418a0aa0cf0cfeafb, type: 3}
+      propertyPath: Gravity
+      value: 0.004
+      objectReference: {fileID: 0}
+    - target: {fileID: 6570221198078183659, guid: 552a5b3dce6724e418a0aa0cf0cfeafb, type: 3}
+      propertyPath: PlanetName
+      value: Betelgeuse
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 552a5b3dce6724e418a0aa0cf0cfeafb, type: 3}

@@ -21,7 +21,7 @@ public class PlanetDataManager : MonoBehaviour
     [SerializeField] public bool ShowAllTrajectories = false;
     private bool TrajectoriesState = false;
 
-    public List<PlanetData> GetAllPlanets() { return Planets; }
+    public ref List<PlanetData> GetAllPlanets() { return ref Planets; }
 
 
     // Start is called before the first frame update

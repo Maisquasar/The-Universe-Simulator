@@ -23,7 +23,10 @@ public class PlanetTab : MonoBehaviour
         foreach (var i in PlanetManager.transform.GetComponentsInChildren<PlanetData>())
         {
             i.gameObject.SetActive(false);
-            var path = AssetDatabase.LoadAssetAtPath<Texture>("Assets/Textures/PlanetsTexture/" + i.name + ".png");
+            i.Prefab = i.PlanetName;
+            var path = Resources.Load<Texture2D>(i.name);
+            if (!path)
+                print("null");
             //var icon = AssetDatabase.GetCachedIcon(path);
             Transform vertical = Instantiate(mLayout.transform.GetChild(0), mLayout.transform);
             vertical.gameObject.SetActive(true);

@@ -31,6 +31,8 @@ public class PlanetData : MonoBehaviour
 
     public bool IsBlackHole = false;
 
+    public string Prefab;
+
     bool mDestroy = false;
 
     public float Radius {
@@ -82,6 +84,10 @@ public class PlanetData : MonoBehaviour
             TrajectoryDrawer.endColor = Color.green;
             TrajectoryDrawer.enabled = false;
             TrajectoryDrawer.positionCount = 0;
+        }
+        if (Placed || IsData)
+        {
+            Prefab = PlanetName;
         }
     }
 
@@ -182,6 +188,7 @@ public class PlanetData : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
+        if (manager.TimeScale == 0) return;
         var planet = other.gameObject.GetComponent<PlanetData>();
         if (planet && !mDestroy && !planet.mDestroy)
         {

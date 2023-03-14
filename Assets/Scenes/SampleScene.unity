@@ -6423,7 +6423,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mesh: {fileID: 0}
-  PointCount: 64
+  PointCount: 16
   PointSize: 100
   ScaleParameter: 1000000000
   ShouldUpdateGrid: 1

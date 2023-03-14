@@ -29,6 +29,8 @@ public class PlanetData : MonoBehaviour
 
     [SerializeField] GameObject Particles;
 
+    public bool IsBlackHole = false;
+
     bool mDestroy = false;
 
     public float Radius {
@@ -185,28 +187,35 @@ public class PlanetData : MonoBehaviour
         {
             if (!planet.Placed || !this.Placed)
                 return;
-            print($"Planet {other.name} hit {name}");
             if (planet.Mass > Mass)
             {
+                print($"Planet {other.name} hit {name}; {name} Destroyed");
                 planet.Mass += Mass;
                 planet.radius += Radius;
                 mDestroy = true;
-                var part = Instantiate(Particles);
-                part.transform.position = this.transform.position;
-                var main = part.GetComponent<ParticleSystem>().main;
-                main.startSize = new ParticleSystem.MinMaxCurve(this.transform.lossyScale.x, this.transform.lossyScale.x);
+                if (!IsBlackHole && !planet.IsBlackHole)
+                {
+                    var part = Instantiate(Particles);
+                    part.transform.position = this.transform.position;
+                    var main = part.GetComponent<ParticleSystem>().main;
+                    main.startSize = new ParticleSystem.MinMaxCurve(this.transform.lossyScale.x, this.transform.lossyScale.x);
+                }
                 Destroy(this.gameObject);
             }
             else
             {
+                print($"Planet {other.name} hit {name}; {other.name} Destroyed");
                 Mass += planet.Mass;
                 Radius += planet.Radius;
                 other.isTrigger = false;
                 planet.mDestroy = true;
-                var part = Instantiate(Particles);
-                part.transform.position = planet.transform.position;
-                var main = part.GetComponent<ParticleSystem>().main;
-                main.startSize = new ParticleSystem.MinMaxCurve(this.transform.lossyScale.x, this.transform.lossyScale.x);
+                if (!IsBlackHole && !planet.IsBlackHole)
+                {
+                    var part = Instantiate(Particles);
+                    part.transform.position = planet.transform.position;
+                    var main = part.GetComponent<ParticleSystem>().main;
+                    main.startSize = new ParticleSystem.MinMaxCurve(this.transform.lossyScale.x, this.transform.lossyScale.x);
+                }
                 Destroy(planet.gameObject);
             }
         }

@@ -14,7 +14,7 @@ public class TimeScaleUI : MonoBehaviour
     private PlanetDataManager manager;
     float mTimeScale = 1f;
     public double TimeScale { set { manager.TimeScale = value; } }
-    bool play = false;
+    bool play = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -31,7 +31,7 @@ public class TimeScaleUI : MonoBehaviour
     public void OnPlayButtonClick()
     {
         play = !play;
-        if (play)
+        if (!play)
         {
             TimeScale = 0;
             mPlayButton.image.sprite = mPlayImage;
@@ -48,7 +48,10 @@ public class TimeScaleUI : MonoBehaviour
         float value;
         if (float.TryParse(InputField.text, out value))
         {
-            TimeScale = value;
+            if (play)
+            {
+                TimeScale = value;
+            }
             mTimeScale = value;
         }
         else

@@ -5,9 +5,5 @@ using UnityEngine;
 public class OtherTab : PlanetTab
 {
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }

@@ -13,8 +13,9 @@ public class PlanetData : MonoBehaviour
     [Tooltip("The Mass In Earth mass (1 EarthMass = 5.97�10^24 kg)")]
     public float Mass = 1.0f;
 
+    [SerializeField]
     [Tooltip("The Radius of the planet in Km")]
-    public float radius = 6371.0f;
+    private float radius = 6371.0f;
 
     [Tooltip("The Desnity of the planet in g/cm^3")]
     public float Density = 5.51f;
@@ -68,6 +69,7 @@ public class PlanetData : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Radius = radius;
         mCamera = Camera.main.GetComponent<CameraScript>();
 
         manager = FindObjectOfType<PlanetDataManager>();

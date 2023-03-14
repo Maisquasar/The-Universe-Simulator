@@ -30,6 +30,7 @@ public class CameraScript : MonoBehaviour
     public PlanetData Focused;
     public PlanetData Hovered;
     public PlanetData Dragged;
+    public bool HasFinishedLerp {get => hasFinishedLerp; }
 
     private Camera mCamera;
 

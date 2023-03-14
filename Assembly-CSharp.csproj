@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{DFBEDD94-864D-78AC-32F5-BA19C9BF1AAC}</ProjectGuid>
+    <ProjectGuid>{C75B1850-15EC-26E6-8F18-D1A439EAE5E8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -60,21 +60,27 @@
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\Common\RenderTextureUtility.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Scripts\ImageEffects.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Scripts\SunShafts.cs" />
+    <Compile Include="Assets\ParticleProFX\PPFXWindow\PPFXWindow.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Scripts\PostEffectsHelper.cs" />
+    <Compile Include="Assets\ParticleProFX\PPFXWindow\PPFXRendererLayer.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Scripts\Bloom.cs" />
     <Compile Include="Assets\Scripts\Ligma.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Scripts\BloomAndFlares.cs" />
     <Compile Include="Assets\Scripts\Ui\ToolUi.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Scripts\ScreenOverlay.cs" />
+    <Compile Include="Assets\ParticleProFX\Resources\Scripts\PPFXCountdownDestruct.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Scripts\BloomOptimized.cs" />
     <Compile Include="Assets\BlackHole\Scripts\AutoBehaviour.cs" />
     <Compile Include="Assets\BlackHole\Scripts\AsteroidRotation.cs" />
     <Compile Include="Assets\Scripts\Ui\TimeScaleUI.cs" />
     <Compile Include="Assets\Scripts\DVec3.cs" />
+    <Compile Include="Assets\ParticleProFX\Resources\Scripts\PPFXScale.cs" />
     <Compile Include="Assets\BlackHole\Scripts\BlackHoleCamera.cs" />
     <Compile Include="Assets\Scripts\PlanetData.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Scripts\Quads.cs" />
     <Compile Include="Assets\Scripts\GravityFieldRenderer.cs" />
+    <Compile Include="Assets\ParticleProFX\Resources\Scripts\PPFXClickMove.cs" />
+    <Compile Include="Assets\ParticleProFX\Resources\Scripts\PPFXClickMoveSmooth.cs" />
     <Compile Include="Assets\Scripts\CameraScript.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Scripts\Triangles.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Utility\FPSCounter.cs" />
@@ -84,22 +90,31 @@
     <Compile Include="Assets\Scripts\Ui\OtherTab.cs" />
     <Compile Include="Assets\Scripts\Ui\StarUiManager.cs" />
     <Compile Include="Assets\BlackHole\Scripts\MouseOrbit.cs" />
+    <Compile Include="Assets\ParticleProFX\Resources\Scripts\PPFXChainReaction.cs" />
     <Compile Include="Assets\Scripts\Ui\StarTab.cs" />
+    <Compile Include="Assets\ParticleProFX\Resources\Scripts\PPFXShockwave.cs" />
+    <Compile Include="Assets\ParticleProFX\Resources\Scripts\PPFXMeteor.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\AntiAliasing\SMAA\SMAA.cs" />
     <Compile Include="Assets\Scripts\Ui\OtherUiManager.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Scripts\PostEffectsBase.cs" />
     <Compile Include="Assets\Scripts\Ui\Inspector.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Scripts\ImageEffectBase.cs" />
+    <Compile Include="Assets\ParticleProFX\Resources\Scripts\PPFXChainReactionInspector.cs" />
     <Compile Include="Assets\Scripts\PlanetDataManager.cs" />
+    <Compile Include="Assets\ParticleProFX\Resources\Scripts\PPFXRigidBodyExtensions.cs" />
     <Compile Include="Assets\Scripts\Ui\PlanetImageUi.cs" />
     <Compile Include="Assets\Scripts\Ui\ScreenShotScript.cs" />
+    <Compile Include="Assets\ParticleProFX\Resources\Scripts\PPFXRandomPosition.cs" />
     <Compile Include="Assets\BlackHole\Scripts\LookAt.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\Common\MinAttribute.cs" />
+    <Compile Include="Assets\ParticleProFX\Resources\Scripts\PPFXAutodestruct.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\AntiAliasing\AntiAliasing.cs" />
     <Compile Include="Assets\Scripts\Ui\UiScript.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\AntiAliasing\IAntiAliasing.cs" />
     <Compile Include="Assets\Scripts\Ui\PlanetTab.cs" />
     <Compile Include="Assets\Scripts\Ui\PlanetUiManager.cs" />
+    <Compile Include="Assets\ParticleProFX\Resources\Scripts\PPFXPhysicForce.cs" />
+    <Compile Include="Assets\ParticleProFX\Resources\Scripts\PPFXLightFlare.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\Common\ImageEffectHelper.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -107,6 +122,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\BlackHole\Shader\BlackHoleNoDupli.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
+    <None Include="Assets\ParticleProFX\readme.txt" />
     <None Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\MultiPassHollywoodFlares.shader" />
     <None Include="Assets\Materials\Testogus.shader" />
     <None Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\Blend.shader" />
@@ -126,6 +142,7 @@
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Shaders\ScreenSpaceRaytrace.cginc" />
     <None Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\VignetteShader.shader" />
+    <None Include="Assets\ParticleProFX\Resources\Shaders\AlphaSelfIllum.shader" />
     <None Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Shaders\SimpleClear.shader" />
     <None Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Shaders\ContrastComposite.shader" />
     <None Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Shaders\Contrast Stretch\MinMaxReduction.shader" />
@@ -163,6 +180,7 @@
     <None Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Shaders\Contrast Stretch\Luminance.shader" />
     <None Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\ImageEffects\Shaders\_BloomAndFlares\BlurAndFlares.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\ParticleProFX\changelog.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
   </ItemGroup>
   <ItemGroup>

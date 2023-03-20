@@ -2,6 +2,7 @@ using Assets.Scripts;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PlanetDataManager : MonoBehaviour
 {
@@ -150,12 +151,13 @@ public class PlanetDataManager : MonoBehaviour
         else return GetFocus();
     }
 
-    public DVec3 GetAccelAtPoint(DVec3 point, PlanetData self = null, bool lerped = false)
+    public DVec3 GetAccelAtPoint(DVec3 point, PlanetData self = null, bool lerped = false, double boxSize = 0)
     {
         DVec3 result = new DVec3();
         foreach (var planet in Planets)
         {
             if (planet == self) continue; // no need to apply +inf acceleration to ourself
+            if (boxSize > 0 && (Math.Abs(planet.transform.position.x) > boxSize || Math.Abs(planet.transform.position.y) > boxSize || Math.Abs(planet.transform.position.z) > boxSize)) continue;
             DVec3 direction = (lerped ? planet.LerpedPosition : planet.PhysicPosition) - point;
             double dist = direction.Length() * 1e7; // one unit is 10 000 Km, so we need to multiply by 1e7 to go in meters
             if (dist < 0.000001) continue; // also no need to apply +inf acceleration at all
@@ -164,12 +166,13 @@ public class PlanetDataManager : MonoBehaviour
         return result / 1e7; // dont forget to rescale up to our unit system
     }
 
-    public double GetAccelForceAtPoint(DVec3 point, PlanetData self = null)
+    public double GetAccelForceAtPoint(DVec3 point, PlanetData self = null, double boxSize = 0)
     {
         double result = 0.0;
         foreach (var planet in Planets)
         {
             if (planet == self) continue; // no need to apply +inf acceleration to ourself
+            if (boxSize > 0 && (Math.Abs(planet.transform.position.x) > boxSize || Math.Abs(planet.transform.position.y) > boxSize || Math.Abs(planet.transform.position.z) > boxSize)) continue;
             DVec3 direction = planet.LerpedPosition - point;
             double dist = direction.Length() * 1e7; // one unit is 10 000 Km, so we need to multiply by 1e7 to go in meters
             if (dist < 0.000001) continue; // also no need to apply +inf acceleration at all

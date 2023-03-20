@@ -23,6 +23,7 @@ public class GravityFieldRenderer : MonoBehaviour
     public double PointSize = 5.0;
     public double ScaleParameter = 10000.0f;
     public bool ShouldUpdateGrid = true;
+    public bool IncludeAllPlanets = false;
     public RenderType type = RenderType.Grid2D;
 
     void Start()
@@ -82,7 +83,7 @@ public class GravityFieldRenderer : MonoBehaviour
             {
                 int index = i * PointCount + j;
                 grid[index] = new Vector3((i * 1.0f / (PointCount - 1) - 0.5f) * (float)PointSize, 0, (j * 1.0f / (PointCount - 1) - 0.5f) * (float)PointSize);
-                double force = mPlanetDataManager.GetAccelForceAtPoint(mPlanetDataManager.GetFocusLerped() + new DVec3(grid[index]));
+                double force = mPlanetDataManager.GetAccelForceAtPoint(mPlanetDataManager.GetFocusLerped() + new DVec3(grid[index]), null, IncludeAllPlanets ? 0 : PointSize / 2);
                 grid[index].y = (float)(-force * ScaleParameter);
                 if (i != PointCount - 1)
                 {
@@ -115,7 +116,7 @@ public class GravityFieldRenderer : MonoBehaviour
                     grid[index] = new Vector3((i * 1.0f / (PointCount - 1) - 0.5f) * (float)PointSize, (j * 1.0f / (PointCount - 1) - 0.5f) * (float)PointSize, (k * 1.0f / (PointCount - 1) - 0.5f) * (float)PointSize);
                     if (!mPlanetDataManager.IsPosInsideSomething(grid[index]))
                     {
-                        DVec3 force = mPlanetDataManager.GetAccelAtPoint(mPlanetDataManager.GetFocusLerped() + new DVec3(grid[index]), null, true) * ScaleParameter;
+                        DVec3 force = mPlanetDataManager.GetAccelAtPoint(mPlanetDataManager.GetFocusLerped() + new DVec3(grid[index]), null, true, IncludeAllPlanets ? 0 : PointSize / 2) * ScaleParameter;
                         if (force.Length() > PointSize / PointCount) force = force.Normalized() * (PointSize / (PointCount - 1));
                         grid[index] = grid[index] + force.AsVector();
                     }
@@ -155,7 +156,7 @@ public class GravityFieldRenderer : MonoBehaviour
                 grid[index] = new Vector3((i * 1.0f / (PointCount - 1) - 0.5f) * (float)PointSize, 0, (j * 1.0f / (PointCount - 1) - 0.5f) * (float)PointSize);
                 if (!mPlanetDataManager.IsPosInsideSomething(grid[index]))
                 {
-                    DVec3 force = mPlanetDataManager.GetAccelAtPoint(mPlanetDataManager.GetFocusLerped() + new DVec3(grid[index]), null, true) * ScaleParameter;
+                    DVec3 force = mPlanetDataManager.GetAccelAtPoint(mPlanetDataManager.GetFocusLerped() + new DVec3(grid[index]), null, true, IncludeAllPlanets ? 0 : PointSize / 2) * ScaleParameter;
                     if (force.Length() > PointSize / PointCount) force = force.Normalized() * (PointSize / (PointCount - 1));
                     grid[index + 1] = grid[index] + force.AsVector();
                 }
@@ -185,7 +186,7 @@ public class GravityFieldRenderer : MonoBehaviour
                     grid[index] = new Vector3((i * 1.0f / (PointCount - 1) - 0.5f) * (float)PointSize, (j * 1.0f / (PointCount - 1) - 0.5f) * (float)PointSize, (k * 1.0f / (PointCount - 1) - 0.5f) * (float)PointSize);
                     if (!mPlanetDataManager.IsPosInsideSomething(grid[index]))
                     {
-                        DVec3 force = mPlanetDataManager.GetAccelAtPoint(mPlanetDataManager.GetFocusLerped() + new DVec3(grid[index]), null, true) * ScaleParameter;
+                        DVec3 force = mPlanetDataManager.GetAccelAtPoint(mPlanetDataManager.GetFocusLerped() + new DVec3(grid[index]), null, true, IncludeAllPlanets ? 0 : PointSize / 2) * ScaleParameter;
                         if (force.Length() > PointSize / PointCount) force = force.Normalized() * (PointSize / (PointCount - 1));
                         grid[index + 1] = grid[index] + force.AsVector();
                     }
@@ -216,8 +217,8 @@ public class GravityFieldRenderer : MonoBehaviour
                 if (!mPlanetDataManager.IsPosInsideSomething(grid[index]))
                 {
                     DVec3 point = mPlanetDataManager.GetFocusLerped() + new DVec3(grid[index]);
-                    DVec3 forceA = mPlanetDataManager.GetAccelAtPoint(point, null, true);
-                    DVec3 forceB = mPlanetDataManager.GetAccelAtPoint(point + new DVec3(delta), null, true);
+                    DVec3 forceA = mPlanetDataManager.GetAccelAtPoint(point, null, true, IncludeAllPlanets ? 0 : PointSize / 2);
+                    DVec3 forceB = mPlanetDataManager.GetAccelAtPoint(point + new DVec3(delta), null, true, IncludeAllPlanets ? 0 : PointSize / 2);
                     DVec3 deriv = (forceB - forceA) / delta * ScaleParameter;
                     if (deriv.Length() > PointSize / PointCount) deriv = deriv.Normalized() * (PointSize / (PointCount - 1));
                     grid[index + 1] = grid[index] + deriv.AsVector();
@@ -249,11 +250,17 @@ public class GravityFieldRenderer : MonoBehaviour
                     if (!mPlanetDataManager.IsPosInsideSomething(grid[index]))
                     {
                         DVec3 point = mPlanetDataManager.GetFocusLerped() + new DVec3(grid[index]);
-                        DVec3 forceA = mPlanetDataManager.GetAccelAtPoint(point, null, true);
-                        DVec3 forceB = mPlanetDataManager.GetAccelAtPoint(point + new DVec3(delta), null, true);
-                        DVec3 deriv = (forceB - forceA) / delta * ScaleParameter;
-                        if (deriv.Length() > PointSize / PointCount) deriv = deriv.Normalized() * (PointSize / (PointCount - 1));
-                        grid[index + 1] = grid[index] + deriv.AsVector();
+                        DVec3 forceR = mPlanetDataManager.GetAccelAtPoint(point, null, true, IncludeAllPlanets ? 0 : PointSize / 2);
+                        DVec3 deltaX = (mPlanetDataManager.GetAccelAtPoint(point + new DVec3(delta,0,0), null, true, IncludeAllPlanets ? 0 : PointSize / 2) - forceR);
+                        DVec3 deltaY = (mPlanetDataManager.GetAccelAtPoint(point + new DVec3(0,delta,0), null, true, IncludeAllPlanets ? 0 : PointSize / 2) - forceR);
+                        DVec3 deltaZ = (mPlanetDataManager.GetAccelAtPoint(point + new DVec3(0,0,delta), null, true, IncludeAllPlanets ? 0 : PointSize / 2) - forceR);
+                        DVec3 result = new DVec3(
+                            deltaY.z - deltaZ.y,
+                            deltaZ.x - deltaX.z,
+                            deltaX.y - deltaY.x
+                            ) / delta * ScaleParameter;
+                        if (result.Length() > PointSize / PointCount) result = result.Normalized() * (PointSize / (PointCount - 1));
+                        grid[index + 1] = grid[index] + result.AsVector();
                     }
                     else
                     {

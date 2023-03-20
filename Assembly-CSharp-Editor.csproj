@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{3312BCD7-E48F-7E66-D281-C310EC3C5F92}</ProjectGuid>
+    <ProjectGuid>{E82FB379-B9BA-A55A-8D22-7CEAFA914BAC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
@@ -317,9 +317,6 @@
     </Reference>
     <Reference Include="UnityEditor.Graphs">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.9f1\Editor\Data\Managed\UnityEditor.Graphs.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.WebGL.Extensions">
-      <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.9f1\Editor\Data\PlaybackEngines\WebGLSupport\UnityEditor.WebGL.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.WindowsStandalone.Extensions">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2021.3.9f1\Editor\Data\PlaybackEngines\WindowsStandaloneSupport\UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
@@ -837,7 +834,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp.csproj">
-      <Project>{C75B1850-15EC-26E6-8F18-D1A439EAE5E8}</Project>
+      <Project>{DFBEDD94-864D-78AC-32F5-BA19C9BF1AAC}</Project>
       <Name>Assembly-CSharp</Name>
     </ProjectReference>
   </ItemGroup>

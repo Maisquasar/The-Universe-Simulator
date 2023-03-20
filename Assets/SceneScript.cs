@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.IO;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SceneScript : MonoBehaviour
 {
@@ -73,6 +74,9 @@ public class SceneScript : MonoBehaviour
         }
     }
     [SerializeField] TMPro.TMP_InputField field;
+    [SerializeField] SceneButton ExampleButton;
+    [SerializeField] List<SceneButton> Buttons = new List<SceneButton>();
+    [SerializeField] GameObject ScrollView;
     string path = "Assets/Resources/Scenes/";
     // Start is called before the first frame update
     void Start()
@@ -86,7 +90,76 @@ public class SceneScript : MonoBehaviour
 
     }
 
-    public void SaveScene()
+    public void ButtonListClicked()
+    {
+        if (ScrollView.activeSelf)
+        {
+            HideScrollView();
+        }
+        else
+        {
+            ShowScrollView();
+        }
+    }
+
+    public void OnEnterInputLoad()
+    {
+        var inspector = FindObjectOfType<Inspector>();
+        inspector.EnterInputField();
+    }
+
+    public void ShowScrollView()
+    {
+        ScrollView.SetActive(true);
+
+        // Get all files in the specified folder path with the ".json" extension
+        string[] jsonFiles = Directory.GetFiles(path, "*.json");
+
+        // Output the number of found JSON files
+        Debug.Log("Found " + jsonFiles.Length + " JSON file(s) in " + path);
+
+        // Output the file paths of all found JSON files
+        foreach (string file in jsonFiles)
+        {
+            var button = Instantiate(ExampleButton, ExampleButton.transform.parent);
+            button.name = file.Substring(file.LastIndexOf('/') + 1);
+            button.name = button.name.Substring(0, button.name.LastIndexOf('.'));
+            button.gameObject.SetActive(true);
+            var textMeshPro = button.transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>();
+            if (textMeshPro)
+                textMeshPro.text = button.name;
+            Buttons.Add(button);
+        }
+        ExampleButton.gameObject.SetActive(false);
+    }
+
+    public void HideScrollView()
+    {
+        ScrollView.SetActive(false);
+        foreach (var button in Buttons)
+        {
+            Destroy(button.gameObject);
+        }
+        Buttons.Clear();
+    }
+
+    public void OnExitInputLoad()
+    {
+        var inspector = FindObjectOfType<Inspector>();
+        inspector.ExitInputField();
+    }
+
+    public void SaveClick()
+    {
+        SaveScene(field.text);
+    }
+
+    public void LoadClick()
+    {
+        LoadScene(field.text);
+    }
+
+    public void SaveScene(string filename)
     {
         if (field.text.Length == 0) return;
         // Serialize the object into JSON and save string.
@@ -97,14 +170,15 @@ public class SceneScript : MonoBehaviour
         jsonString = JsonUtility.ToJson(planetmanager);
 
         // Write JSON to file.
-        File.WriteAllText(path + field.text + ".json", jsonString);
+        File.WriteAllText(path + filename + ".json", jsonString);
     }
-    public void LoadScene()
+
+    public void LoadScene(string filename)
     {
-        if (File.Exists(path + field.text + ".json"))
+        if (File.Exists(path + filename + ".json"))
         {
             // Read the entire file and save its contents.
-            string fileContents = File.ReadAllText(path + field.text + ".json");
+            string fileContents = File.ReadAllText(path + filename + ".json");
 
             // Deserialize the JSON data 
             //  into a pattern matching the GameData class.

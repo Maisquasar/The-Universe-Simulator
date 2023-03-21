@@ -24,6 +24,7 @@ public class GravityFieldRenderer : MonoBehaviour
     public double ScaleParameter = 10000.0f;
     public bool ShouldUpdateGrid = true;
     public bool IncludeAllPlanets = false;
+    public double delta = 0.0001;
     public RenderType type = RenderType.Grid2D;
 
     void Start()
@@ -202,7 +203,6 @@ public class GravityFieldRenderer : MonoBehaviour
         }
     }
 
-    const double delta = 0.0001;
     private void Create2DRotate(out Vector3[] grid, out int[] indexes)
     {
         grid = new Vector3[PointCount * PointCount * 2];
@@ -251,14 +251,14 @@ public class GravityFieldRenderer : MonoBehaviour
                     {
                         DVec3 point = mPlanetDataManager.GetFocusLerped() + new DVec3(grid[index]);
                         DVec3 forceR = mPlanetDataManager.GetAccelAtPoint(point, null, true, IncludeAllPlanets ? 0 : PointSize / 2);
-                        DVec3 deltaX = (mPlanetDataManager.GetAccelAtPoint(point + new DVec3(delta,0,0), null, true, IncludeAllPlanets ? 0 : PointSize / 2) - forceR);
-                        DVec3 deltaY = (mPlanetDataManager.GetAccelAtPoint(point + new DVec3(0,delta,0), null, true, IncludeAllPlanets ? 0 : PointSize / 2) - forceR);
-                        DVec3 deltaZ = (mPlanetDataManager.GetAccelAtPoint(point + new DVec3(0,0,delta), null, true, IncludeAllPlanets ? 0 : PointSize / 2) - forceR);
+                        DVec3 deltaX = (mPlanetDataManager.GetAccelAtPoint(point + new DVec3(delta,0,0), null, true, IncludeAllPlanets ? 0 : PointSize / 2) - forceR) / delta;
+                        DVec3 deltaY = (mPlanetDataManager.GetAccelAtPoint(point + new DVec3(0,delta,0), null, true, IncludeAllPlanets ? 0 : PointSize / 2) - forceR) / delta;
+                        DVec3 deltaZ = (mPlanetDataManager.GetAccelAtPoint(point + new DVec3(0,0,delta), null, true, IncludeAllPlanets ? 0 : PointSize / 2) - forceR) / delta;
                         DVec3 result = new DVec3(
                             deltaY.z - deltaZ.y,
                             deltaZ.x - deltaX.z,
                             deltaX.y - deltaY.x
-                            ) / delta * ScaleParameter;
+                            ) * ScaleParameter;
                         if (result.Length() > PointSize / PointCount) result = result.Normalized() * (PointSize / (PointCount - 1));
                         grid[index + 1] = grid[index] + result.AsVector();
                     }

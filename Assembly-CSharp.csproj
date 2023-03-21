@@ -9,7 +9,7 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{DFBEDD94-864D-78AC-32F5-BA19C9BF1AAC}</ProjectGuid>
+    <ProjectGuid>{ABF242E1-1730-C04E-EF98-CD54322C0066}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <AssemblyName>Assembly-CSharp</AssemblyName>
@@ -118,6 +118,7 @@
     <Compile Include="Assets\ParticleProFX\Resources\Scripts\PPFXPhysicForce.cs" />
     <Compile Include="Assets\ParticleProFX\Resources\Scripts\PPFXLightFlare.cs" />
     <Compile Include="Assets\AHProxy\PlanetShader\DemoScene\Standard Assets\Effects\Common\ImageEffectHelper.cs" />
+    <Compile Include="Assets\Scripts\Ui\InspectorGravityField.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

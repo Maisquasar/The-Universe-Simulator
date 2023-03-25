@@ -140,7 +140,6 @@ public class PlanetData : MonoBehaviour
     public void SetPlanetName(string value)
     {
         PlanetName = value;
-        GetComponentInChildren<PlanetNameScript>().Planet3DText.text = PlanetName;
     }
 
     private void OnDestroy()
@@ -155,7 +154,8 @@ public class PlanetData : MonoBehaviour
         var Distance = Vector3.Distance(Camera.main.transform.position, transform.position);
         var screenPoint = Camera.main.WorldToScreenPoint(transform.position);
         bool inside = mCamera.IsInside(screenPoint.x, screenPoint.y, mCamera.CircleRadius, mouse.x, mouse.y);
-        if (inside)
+        Vector3 camToObject = transform.position - Camera.main.transform.position;
+        if (inside && Vector3.Dot(Camera.main.transform.forward, camToObject) > 0)
         {
             if (mCamera.Hovered == null || (mCamera.Hovered != this && Distance < Vector3.Distance(Camera.main.transform.position, mCamera.Hovered.transform.position)))
             {
@@ -179,8 +179,6 @@ public class PlanetData : MonoBehaviour
 
     public void OnClick()
     {
-        if (mCamera.Selected == this && mCamera.CurrentTool == CameraScript.Tool.SELECTION)
-            return;
         TrajectoryDrawer.enabled = true;
         mCamera.SelectPlanet(this);
     }

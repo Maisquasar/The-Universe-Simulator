@@ -12,16 +12,19 @@ public class InspectorGravityField : MonoBehaviour
     public TMP_InputField IPointSize;
     public TMP_InputField IScaleParameter;
     public Toggle IIncludeAllPlanets;
+    public Toggle IDrawAllTrajectories;
     public TMP_Dropdown IType;
 
     [NonSerialized] public bool InputFileSelected = false;
     private GravityFieldRenderer mGField;
+    private PlanetDataManager mData;
     bool hide = false;
     // Start is called before the first frame update
     void Start()
     {
         Hide();
-        mGField = GameObject.Find("GravityFieldRenderer").GetComponent<GravityFieldRenderer>();
+        mGField = FindObjectOfType<GravityFieldRenderer>();
+        mData = FindObjectOfType<PlanetDataManager>();
     }
 
     // Update is called once per frame
@@ -94,10 +97,17 @@ public class InspectorGravityField : MonoBehaviour
         }
         IScaleParameter.text = mGField.ScaleParameter.ToString();
     }
+
     public void IncludeAllPlanetsCheck()
     {
         mGField.IncludeAllPlanets = IIncludeAllPlanets.isOn;
     }
+
+    public void DrawAllTrajectories()
+    {
+        mData.ShowAllTrajectories = IDrawAllTrajectories.isOn;
+    }
+
     public void TypeChanged()
     {
         if (IType.value >= Enum.GetNames(typeof(RenderType)).Length || IType.value < 0) IType.value = 0;

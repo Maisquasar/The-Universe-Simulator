@@ -113,6 +113,7 @@ public class CameraScript : MonoBehaviour
         mCamera.nearClipPlane = Mathf.Max(Distance * 0.000001f, 0.01f);
         Distance -= (Distance * 5) * Input.mouseScrollDelta.y * ScrollSensibility;
         Distance = Mathf.Min(Distance, 500000);
+        CameraSpeed = Distance * 0.01f;
         float min = GetMin();
         if (Distance < min) Distance = min;
         if (Input.GetKey(KeyCode.Mouse1))
@@ -129,14 +130,6 @@ public class CameraScript : MonoBehaviour
         transform.RotateAround(Center, transform.right, -delta.y);
 
         //Inputs Update 
-        if (Input.GetKey(KeyCode.LeftShift) && CameraSpeed == initalSpeed)
-        {
-            CameraSpeed *= 2;
-        }
-        else
-        {
-            CameraSpeed = initalSpeed;
-        }
         if (Input.GetKey(KeyCode.W))
         {
             if (Focused)

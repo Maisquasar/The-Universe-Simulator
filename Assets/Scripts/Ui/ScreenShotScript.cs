@@ -8,7 +8,7 @@ public class ScreenShotScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SaveScreenshotToFile("Assets/Resources" + PictureName + ".png");
+        SaveScreenshotToFile("Assets/Resources/" + PictureName + ".png");
     }
 
     public Texture2D TakeScreenShot()

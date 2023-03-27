@@ -52,6 +52,20 @@ This project was used to apply the vector analysis chapter to simulate object mo
     - #### Gravity Field Editor
         ![Gravity Field Editor Screenshot](https://cdn.discordapp.com/attachments/1027192447232643152/1089883884004577362/image.png)
         This editor allows the user to change the gravity field viewer setting.
+        - Draw Gravity Field :
+            if enabled, it will draw the gravity field. (disable by default)
+        - Point Count :
+            The number of points on one side of the field.
+        - Point Size :
+            The distance between the points.
+        - Scale Parameter :
+            This is the coefficient by which the force vectors are multiplied
+        - Include all Planets :
+            if enabled, it will include all Planets in the field calcul. (enable by default)
+        - Type :
+            The type of representation.
+        - DrawAllTrajectories :
+            if enabled, it will draw the trajectories of objects. (disable by default)
 ## Screenshot :
 ![01](https://cdn.discordapp.com/attachments/1027192447232643152/1089888918821929051/image.png)
 ![02](https://cdn.discordapp.com/attachments/1027192447232643152/1089889085973352508/image.png)

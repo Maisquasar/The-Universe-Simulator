@@ -63,12 +63,12 @@ public class CameraScript : MonoBehaviour
     {
         Vector2 val = context.ReadValue<Vector2>();
         cameraMov.x = val.x;
-        cameraMov.y = val.y;
+        cameraMov.z = val.y;
     }
 
     public void OnMoveV(InputAction.CallbackContext context)
     {
-        cameraMov.z = context.ReadValue<float>();
+        cameraMov.y = context.ReadValue<float>();
     }
 
     public void SetCircleRadius(float radius)
@@ -149,8 +149,7 @@ public class CameraScript : MonoBehaviour
         if (Focused && cameraMov.sqrMagnitude > 0) DisableFocus();
         Center += transform.rotation * cameraMov * CameraSpeed;
 
-
-        if (Mouse.current.leftButton.ReadValue() != 0 && Physics.RaycastAll(Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue())).Length == 0)
+        if (Mouse.current.leftButton.wasPressedThisFrame && Physics.RaycastAll(Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue())).Length == 0)
         {
             if (Selected)
                 Deselect();

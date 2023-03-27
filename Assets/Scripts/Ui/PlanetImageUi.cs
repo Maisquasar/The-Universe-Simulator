@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class PlanetImageUi : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
@@ -35,7 +36,7 @@ public class PlanetImageUi : MonoBehaviour, IPointerDownHandler, IPointerUpHandl
 
     static public void UpdateDraggedPlanet(GameObject planet)
     {
-        var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        var ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         planet.transform.position = GetPoint(ray, planet);
     }
 

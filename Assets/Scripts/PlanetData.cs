@@ -164,7 +164,7 @@ public class PlanetData : MonoBehaviour
             }
             if (mCamera.Hovered == this)
             {
-                if (Mouse.current.leftButton.ReadValue() != 0)
+                if (Mouse.current.leftButton.wasPressedThisFrame)
                 {
                     this.OnClick();
                 }

@@ -50,7 +50,10 @@ public class CameraScript : MonoBehaviour
     {
         Hovered = planet;
         if (planet)
+        {
             mCircle.SetActive(true);
+            mCircle.transform.position = new Vector3(planet.transform.position.x, planet.transform.position.y, 0);
+        }
         else
             mCircle.SetActive(false);
 

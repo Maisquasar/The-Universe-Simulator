@@ -77,7 +77,7 @@ public class SceneScript : MonoBehaviour
     [SerializeField] SceneButton ExampleButton;
     [SerializeField] List<SceneButton> Buttons = new List<SceneButton>();
     [SerializeField] GameObject ScrollView;
-    string path = "Assets/Resources/Scenes/";
+    string path = Application.streamingAssetsPath + "/Resources/Scenes/";
     // Start is called before the first frame update
     void Start()
     {

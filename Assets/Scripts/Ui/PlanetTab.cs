@@ -24,9 +24,12 @@ public class PlanetTab : MonoBehaviour
         {
             i.gameObject.SetActive(false);
             i.Prefab = i.PlanetName;
-            var path = Resources.Load<Texture2D>(i.name);
-            if (!path)
-                print("null");
+            //Converts desired path into byte array
+            byte[] pngBytes = System.IO.File.ReadAllBytes(Application.streamingAssetsPath + "/Resources/" + i.name + ".png");
+
+            //Creates texture and loads byte array data to create image
+            Texture2D tex = new Texture2D(2, 2);
+            tex.LoadImage(pngBytes);
             //var icon = AssetDatabase.GetCachedIcon(path);
             Transform vertical = Instantiate(mLayout.transform.GetChild(0), mLayout.transform);
             vertical.gameObject.SetActive(true);
@@ -34,7 +37,7 @@ public class PlanetTab : MonoBehaviour
             ImageTextGroup imageTextGroup = new ImageTextGroup();
             imageTextGroup.image = vertical.transform.GetComponentInChildren<RawImage>();
             imageTextGroup.text = vertical.transform.GetComponentInChildren<Text>();
-            imageTextGroup.image.texture = path;
+            imageTextGroup.image.texture = tex;
             imageTextGroup.text.text = i.name;
             PlanetsImageTextGroup.Add(imageTextGroup);
         }

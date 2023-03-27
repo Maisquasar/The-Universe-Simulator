@@ -23,6 +23,7 @@ public class UiScript : MonoBehaviour
 
     [SerializeField] GameObject mTextContainer;
     [SerializeField] GameObject mTextExample;
+    [SerializeField] TextMeshProUGUI mTextZoom;
 
     Tab mCurrentTab = Tab.NONE;
     PlanetDataManager manager;
@@ -53,6 +54,7 @@ public class UiScript : MonoBehaviour
             position.z = 0;
             text.Value.transform.position = position;
         }
+        mTextZoom.text = $"Zoom : {(Camera.main.GetComponent<CameraScript>().Distance / 500000f).ToString("0.000")}%";
     }
 
     public void AddText(PlanetData planet)

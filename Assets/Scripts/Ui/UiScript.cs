@@ -60,7 +60,7 @@ public class UiScript : MonoBehaviour
             position.z = 0;
             text.Value.transform.position = position;
         }
-        mTextZoom.text = $"Zoom : {(Camera.main.GetComponent<CameraScript>().Distance / 500000f).ToString("0.0000")}%";
+        mTextZoom.text = $"Zoom : {(Camera.main.GetComponent<CameraScript>().Distance / 5000f).ToString("  0.000")}%";
     }
 
     public void AddText(PlanetData planet)

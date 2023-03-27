@@ -107,7 +107,7 @@ public class CameraScript : MonoBehaviour
         {
             PlanetImageUi.UpdateDraggedPlanet(Dragged.gameObject);
         }
-        else if (Dragged && Input.GetMouseButtonUp(0))
+        else if (Dragged && Mouse.current.leftButton.wasReleasedThisFrame)
         {
             Dragged.EndDrag();
             Dragged = null;

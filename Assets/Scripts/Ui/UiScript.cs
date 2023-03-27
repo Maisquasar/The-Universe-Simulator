@@ -36,6 +36,12 @@ public class UiScript : MonoBehaviour
         manager = FindObjectOfType<PlanetDataManager>();
         mTextExample.SetActive(false);
     }
+
+    public void QuitSimulation()
+    {
+        Application.Quit();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -54,7 +60,7 @@ public class UiScript : MonoBehaviour
             position.z = 0;
             text.Value.transform.position = position;
         }
-        mTextZoom.text = $"Zoom : {(Camera.main.GetComponent<CameraScript>().Distance / 500000f).ToString("0.000")}%";
+        mTextZoom.text = $"Zoom : {(Camera.main.GetComponent<CameraScript>().Distance / 500000f).ToString("0.0000")}%";
     }
 
     public void AddText(PlanetData planet)

@@ -25,6 +25,7 @@ public class GravityFieldRenderer : MonoBehaviour
     public bool ShouldUpdateGrid = true;
     public bool IncludeAllPlanets = false;
     public double delta = 0.0001;
+    public bool ShouldDraw = true;
     public RenderType type = RenderType.Grid2D;
 
     void Start()
@@ -39,6 +40,11 @@ public class GravityFieldRenderer : MonoBehaviour
     void LateUpdate()
     {
         if (!ShouldUpdateGrid || PointCount < 2) return;
+        if (!ShouldDraw)
+        {
+            mesh.Clear();
+            return;
+        }
         Vector3[] grid;
         int[] indexes;
         switch (type)

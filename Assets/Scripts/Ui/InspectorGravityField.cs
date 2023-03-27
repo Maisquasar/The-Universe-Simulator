@@ -13,6 +13,7 @@ public class InspectorGravityField : MonoBehaviour
     public TMP_InputField IScaleParameter;
     public Toggle IIncludeAllPlanets;
     public Toggle IDrawAllTrajectories;
+    public Toggle IDrawGField;
     public TMP_Dropdown IType;
 
     [NonSerialized] public bool InputFileSelected = false;
@@ -106,6 +107,11 @@ public class InspectorGravityField : MonoBehaviour
     public void DrawAllTrajectories()
     {
         mData.ShowAllTrajectories = IDrawAllTrajectories.isOn;
+    }
+
+    public void DrawGField()
+    {
+        mGField.ShouldDraw = IDrawGField.isOn;
     }
 
     public void TypeChanged()

@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.InputSystem;
 
 public class CameraScript : MonoBehaviour
 {
@@ -14,7 +15,7 @@ public class CameraScript : MonoBehaviour
 
     public Vector3 Center;
     public float Distance = 5.0f;
-    public float ScrollSensibility = 10.0f;
+    public float ScrollSensibility = .001f;
     public float MoveSensibility = 0.5f;
     public float CameraSpeed = 1f;
     private float initalSpeed = 0.0f;
@@ -24,12 +25,14 @@ public class CameraScript : MonoBehaviour
     private Inspector mInspector;
     private bool hasFinishedLerp = false;
     private PlanetDataManager mPlanetDataManager;
+    private Vector3 cameraMov = Vector3.zero;
     [System.NonSerialized] public Tool CurrentTool = Tool.SELECTION;
 
     public PlanetData Selected;
     public PlanetData Focused;
     public PlanetData Hovered;
     public PlanetData Dragged;
+
     public bool HasFinishedLerp {get => hasFinishedLerp; }
 
     private Camera mCamera;
@@ -53,6 +56,18 @@ public class CameraScript : MonoBehaviour
 
     }
 
+    public void OnMoveH(InputAction.CallbackContext context)
+    {
+        Vector2 val = context.ReadValue<Vector2>();
+        cameraMov.x = val.x;
+        cameraMov.y = val.y;
+    }
+
+    public void OnMoveV(InputAction.CallbackContext context)
+    {
+        cameraMov.z = context.ReadValue<float>();
+    }
+
     public void SetCircleRadius(float radius)
     {
         CircleRadius = radius;
@@ -62,7 +77,6 @@ public class CameraScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ScrollSensibility = 0.025f;
         initalSpeed = CameraSpeed;
         mInspector = FindObjectOfType<Inspector>();
         mPlanetDataManager = FindObjectOfType<PlanetDataManager>();
@@ -86,7 +100,7 @@ public class CameraScript : MonoBehaviour
     {
         UpdateCameraMovements();
         mCircle.SetActive(Hovered);
-        if (Input.GetMouseButton(0) && Dragged)
+        if (Mouse.current.leftButton.ReadValue() != 0 && Dragged)
         {
             PlanetImageUi.UpdateDraggedPlanet(Dragged.gameObject);
         }
@@ -111,63 +125,29 @@ public class CameraScript : MonoBehaviour
         // Return if inside an Ui Component
         if (mInspector.InputFileSelected || ClickOnUI()) return;
         mCamera.nearClipPlane = Mathf.Max(Distance * 0.000001f, 0.01f);
-        Distance -= (Distance * 5) * Input.mouseScrollDelta.y * ScrollSensibility;
+        Distance -= (Distance * 5) * (Mouse.current.scroll.ReadValue().y * ScrollSensibility);
         Distance = Mathf.Min(Distance, 500000);
         CameraSpeed = Distance * 0.01f;
         float min = GetMin();
         if (Distance < min) Distance = min;
-        if (Input.GetKey(KeyCode.Mouse1))
+        if (Mouse.current.rightButton.ReadValue() != 0)
         {
-            var newPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            var newPos = Mouse.current.position.ReadValue();
             delta = (newPos - lastPos) * MoveSensibility;
             lastPos = newPos;
         }
         else
         {
-            lastPos = new Vector2(Input.mousePosition.x, Input.mousePosition.y);
+            lastPos = Mouse.current.position.ReadValue();
         }
         transform.RotateAround(Center, transform.up, delta.x);
         transform.RotateAround(Center, transform.right, -delta.y);
 
-        //Inputs Update 
-        if (Input.GetKey(KeyCode.W))
-        {
-            if (Focused)
-                DisableFocus();
-            Center += transform.forward * CameraSpeed;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            if (Focused)
-                DisableFocus();
-            Center -= transform.forward * CameraSpeed;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            if (Focused)
-                DisableFocus();
-            Center += transform.right * CameraSpeed;
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            if (Focused)
-                DisableFocus();
-            Center -= transform.right * CameraSpeed;
-        }
-        if (Input.GetKey(KeyCode.E))
-        {
-            if (Focused)
-                DisableFocus();
-            Center += transform.up * CameraSpeed;
-        }
-        if (Input.GetKey(KeyCode.Q))
-        {
-            if (Focused)
-                DisableFocus();
-            Center -= transform.up * CameraSpeed;
-        }
+        if (Focused && cameraMov.sqrMagnitude > 0) DisableFocus();
+        Center += transform.rotation * cameraMov * CameraSpeed;
 
-        if (Input.GetMouseButtonDown(0) && Physics.RaycastAll(Camera.main.ScreenPointToRay(Input.mousePosition)).Length == 0)
+
+        if (Mouse.current.leftButton.ReadValue() != 0 && Physics.RaycastAll(Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue())).Length == 0)
         {
             if (Selected)
                 Deselect();
@@ -196,7 +176,7 @@ public class CameraScript : MonoBehaviour
     public bool ClickOnUI()
     {
         var pointerEventData = new PointerEventData(EventSystem.current);
-        pointerEventData.position = Input.mousePosition;
+        pointerEventData.position = Mouse.current.position.ReadValue();
         var raycastResults = new List<RaycastResult>();
         EventSystem.current.RaycastAll(pointerEventData, raycastResults);
         if (raycastResults.Count > 0)

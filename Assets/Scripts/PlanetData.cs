@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class PlanetData : MonoBehaviour
 {
@@ -150,7 +151,7 @@ public class PlanetData : MonoBehaviour
 
     void Update()
     {
-        var mouse = Input.mousePosition;
+        var mouse = Mouse.current.position.ReadValue();
         var Distance = Vector3.Distance(Camera.main.transform.position, transform.position);
         var screenPoint = Camera.main.WorldToScreenPoint(transform.position);
         bool inside = mCamera.IsInside(screenPoint.x, screenPoint.y, mCamera.CircleRadius, mouse.x, mouse.y);
@@ -163,7 +164,7 @@ public class PlanetData : MonoBehaviour
             }
             if (mCamera.Hovered == this)
             {
-                if (Input.GetMouseButtonDown(0))
+                if (Mouse.current.leftButton.ReadValue() != 0)
                 {
                     this.OnClick();
                 }
